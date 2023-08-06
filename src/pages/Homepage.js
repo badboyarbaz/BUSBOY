@@ -1,9 +1,51 @@
 import BusSearchCard from "../components/BusSearchCard";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   return (
-    <div className="relative bg-white w-full h-[1427px] overflow-hidden">
-      <footer className="absolute top-[1140px] left-[0px] bg-royalblue-100 w-[1915px] h-[287px] flex flex-col p-[100px] box-border items-start justify-start gap-[60px] text-left text-5xl text-white font-poppins">
+    <div className="relative bg-white w-full h-[1427px] overflow-hidden flex flex-col min-h-screen flex-grow">
+      <header className="absolute top-[0px] left-[0px] w-[1912px] flex flex-row py-10 px-[100px] box-border items-start justify-start text-left text-[39px] text-royalblue-100 font-poppins">
+        <a className="[text-decoration:none] relative font-semibold text-[inherit]">
+          <span>BUS</span>
+          <span className="text-gray-200">BOY</span>
+        </a>
+      </header>
+      <main className="relative ml-8  top-[150px] left-[calc(50% - 390px)] w-full h-[800px] flex flex-col items-start justify-start font-poppins">
+        <div className="flex flex-col ">
+        <button
+          className="cursor-pointer py-2.5 px-5 bg-royalblue-100 rounded-[30px] w-[250px] h-[60px] flex flex-row box-border items-center justify-center relative z-0"
+          autoFocus
+        >
+          <div className="relative text-base text-center font-medium font-poppins text-white">
+            Hello Travellers
+          </div>
+        </button>
+          <h1
+            className="mt-6 relative text-[inherit] text-[64px] leading-[90px] font-medium font-inherit inline-block"
+          >
+            <p className="m-0">made your booking</p>
+            <p className="m-0">experience easy!</p>
+          </h1>
+          <h3 className="m-0 self-stretch relative text-[16px] leading-[24px] font-normal font-inherit text-dimgray inline-block">
+            Unlock the gateway to effortless adventures
+          </h3>
+          <h3 className="m-0 self-stretch relative text-[16px] font-normal font-inherit text-dimgray inline-block">
+          Where booking your dream ride becomes a luxurious breeze!
+          </h3>
+          <BusSearchCard />
+        </div>
+        <img
+          className="w-[650px] h-[1140px] object-cover fixed top-0 right-0"
+          alt=""
+          src="/frame-3003@1x.png"
+        />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+/*      <footer className="absolute top-[1140px] left-[0px] bg-royalblue-100 w-[1915px] h-[287px] flex flex-col p-[100px] box-border items-start justify-start gap-[60px] text-left text-5xl text-white font-poppins">
         <div className="my-0 mx-[!important] absolute top-[208px] left-[1519px] w-[241px] flex flex-row items-center justify-between z-[0]">
           <img
             className="relative w-[27.5px] h-[32.5px]"
@@ -63,39 +105,5 @@ const Homepage = () => {
             Customer Service
           </a>
         </div>
-      </footer>
-      <BusSearchCard />
-      <main className="absolute top-[285px] left-[100px] w-[706px] h-[312px] flex flex-col items-start justify-start gap-[20px] text-left text-[64px] text-gray-200 font-poppins">
-        <button
-          className="cursor-pointer [border:none] py-2.5 px-5 bg-royalblue-100 rounded-[30px] w-[180px] h-[50px] flex flex-row box-border items-start justify-start relative z-[0]"
-          autoFocus
-        >
-          <div className="absolute my-0 mx-[!important] top-[calc(50%_-_12px)] left-[calc(50%_-_61px)] text-base font-medium font-poppins text-white text-left z-[0]">
-            Hello Travellers
-          </div>
-        </button>
-        <h1 className="m-0 self-stretch flex-1 relative text-[inherit] leading-[90px] font-medium font-inherit z-[1]">
-          <p className="m-0">{`made your booking `}</p>
-          <p className="m-0">experience easy!</p>
-        </h1>
-        <h3 className="m-0 self-stretch relative text-base font-normal font-inherit text-dimgray inline-block h-[70px] shrink-0 z-[2]">
-          Unlock the gateway to effortless adventures - Where booking your dream
-          ride becomes a luxurious breeze!
-        </h3>
-        <img
-          className="my-0 mx-[!important] absolute top-[-285px] left-[794px] w-[1020px] h-[1144px] object-cover z-[3]"
-          alt=""
-          src="/frame-3003@1x.png"
-        />
-      </main>
-      <header className="absolute top-[0px] left-[0px] w-[1912px] flex flex-row py-10 px-[100px] box-border items-start justify-start text-left text-[39px] text-royalblue-100 font-poppins">
-        <a className="[text-decoration:none] relative font-semibold text-[inherit]">
-          <span>BUS</span>
-          <span className="text-gray-200">BOY</span>
-        </a>
-      </header>
-    </div>
-  );
-};
-
+      </footer> */
 export default Homepage;

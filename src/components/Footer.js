@@ -9,7 +9,7 @@ const Footer = ({ dimensionCode, socialTop }) => {
 
   return (
     <footer
-      className="absolute top-[1431px] left-[0px] bg-royalblue-100 w-[1920px] h-[287px] flex flex-col p-[100px] box-border items-start justify-start gap-[60px] text-left text-5xl text-white font-poppins"
+      className="absolute bottom-0 inset-x-0  bg-royalblue-100 w-full h-[287px] flex flex-col p-[100px] box-border items-start justify-start gap-[60px] text-left text-5xl text-white font-poppins"
       style={footerStyle}
     >
       <div className="my-0 mx-[!important] absolute top-[208px] left-[1519px] w-[241px] flex flex-row items-center justify-between z-[0]">
