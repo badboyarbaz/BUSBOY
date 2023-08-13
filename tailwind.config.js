@@ -3,6 +3,7 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      backgroundColor: ['first'],
       colors: {
         white: "#fff",
         gray: {
@@ -50,4 +51,8 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
+  plugins: [
+    // ...
+    require('tailwind-scrollbar')({ nocompatible: true }),
+],
 };

@@ -1,57 +1,86 @@
 import BusLink from "./BusLink";
 
+
 const AvailableBusesList = () => {
+  const busLinksData = [
+    {
+      busOperatorName: 'Humsafar Travels',
+      sleeperBusType: 'Type 1',
+      busDepartureTime: '04:30',
+      busArrivalTime: '08:30',
+      availableSeats: '20',
+      busDepartureDate: 'Nov 16',
+      busArrivalDate: 'Nov 17' ,
+      journeyDuration: '8 hours',
+      propHeight: '300px',
+      propWidth : '900px',
+      propJustifyContent: 'flex-end',
+    },
+    {
+      busOperatorName: 'Musafir Travels',
+      sleeperBusType: 'Type 1',
+      busDepartureTime: '04:30',
+      busArrivalTime: '08:30',
+      availableSeats: '20',
+      busDepartureDate: 'Nov 16',
+      busArrivalDate: 'Nov 17' ,
+      journeyDuration: '8 hours',
+      propHeight: '300px',
+      propWidth : '900px',
+      propJustifyContent: 'flex-end',
+    },
+    {
+      busOperatorName: 'Dolphin Travels',
+      sleeperBusType: 'Type 1',
+      busDepartureTime: '04:30',
+      busArrivalTime: '08:30',
+      availableSeats: '20',
+      busDepartureDate: 'Nov 16',
+      busArrivalDate: 'Nov 17' ,
+      journeyDuration: '8 hours',
+      propHeight: '300px',
+      propWidth : '900px',
+      propJustifyContent: 'flex-end',
+    },
+    {
+      busOperatorName: 'VRL Travels',
+      sleeperBusType: 'Type 1',
+      busDepartureTime: '04:30',
+      busArrivalTime: '08:30',
+      availableSeats: '20',
+      busDepartureDate: 'Nov 16',
+      busArrivalDate: 'Nov 17' ,
+      journeyDuration: '8 hours',
+      propHeight: '300px',
+      propWidth : '900px',
+      propJustifyContent: 'flex-end',
+    },
+  ];
   return (
-    <ul className="m-0 relative w-[900px] h-[1222px] text-left text-sm text-gray-200 font-poppins">
-      <div className="absolute top-[106px] left-[0px] h-[1117px] overflow-y-auto flex flex-col pt-0 px-0 pb-[136px] box-border items-center justify-start gap-[52px]">
-        <BusLink
-          busOperatorName="Humsafar Travels"
-          sleeperBusType="Bharat Benz A/C Sleeper (2+1)"
-          propHeight="300px"
-        />
-        <BusLink
-          busOperatorName="Musafir Travels"
-          sleeperBusType="A/C Sleeper (2+1)"
-          propWidth="128px"
-          propJustifyContent="flex-end"
-          propWidth1="541.33px"
-          propHeight="5.33px"
-        />
-        <BusLink
-          busOperatorName="Musafir Travels"
-          sleeperBusType="A/C Sleeper (2+1)"
-          propWidth="128px"
-          propJustifyContent="flex-end"
-          propWidth1="541.33px"
-          propHeight="5.33px"
-        />
-        <BusLink
-          busOperatorName="VRL Travels"
-          sleeperBusType="Volvo Multi-Axle I-Shift A/C Sleeper (2+1)"
-          propWidth="290px"
-          propJustifyContent="flex-start"
-          propWidth1="536px"
-          propHeight="0px"
-        />
+    <div h-32 w-64>
+    <ul className="m-0 relative w-[950px] h-[1222px] text-left text-sm text-gray-200 font-poppins overflow-hidden  ">
+      <div className="relative top-[106px] left-[0px] h-[1117px] overflow-y-auto flex flex-col pt-0 px-0 pb-[136px] box-border items-center justify-start gap-[52px] scrollbar-thin scrollbar-track-white scrollbar-thumb-royalblue-400 scrollbar-thumb-rounded ">
+      {busLinksData.map((busLinkData, index) => (
+        <BusLink key={index} {...busLinkData} />
+      ))}
       </div>
-      <div className="absolute top-[106px] left-[922px]">
-        <div className="relative rounded-10xs bg-white w-[5px] h-[1080px]" />
-        <div className="relative rounded-8xs bg-royalblue-400 w-2 h-[420px]" />
-      </div>
-      <div className="absolute top-[0px] left-[0px] box-border w-[927px] flex flex-row p-[15px] items-center justify-between text-13xl border-b-[1.5px] border-solid border-gray-400">
-        <div className="flex flex-row items-center justify-start gap-[30px]">
+    </ul>
+      <div className="absolute w-[927px] h-[78px] top-[0px] left-[800px] box-border w-[927px] flex flex-row p-[15px] items-center justify-between text-13xl border-b-[1.5px] border-solid border-gray-400">
+        <div className="relative w-[927px] h-[78px] ml-0 flex flex-row items-center justify-start gap-[30px]">
           <div className="relative font-medium">Available Buses</div>
           <div className="relative text-xs font-medium text-gray-100">
             5 Buses available
           </div>
-        </div>
-        <img
-          className="relative w-[30px] h-[30px]"
+          <img
+          className="absolute right-0 w-[30px] h-[30px]"
           alt=""
           src="/group-2876.svg"
         />
+        </div>
+        
       </div>
-    </ul>
+    </div>
+    
   );
 };
 
