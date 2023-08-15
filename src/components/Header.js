@@ -19,7 +19,7 @@ const Header = ({ propTextDecoration, propTextDecoration1 }) => {
         <span>BUS</span>
         <span className="text-gray-200">BOY</span>
       </div>
-      <div className="flex flex-row items-start justify-start gap-[60px] text-sm text-darkslategray">
+      <div className="flex flex-row items-start justify-start gap-[60px] text-md text-darkslategray">
         <a
           className="[text-decoration:none] relative font-medium text-[inherit]"
           style={myBookingStyle}

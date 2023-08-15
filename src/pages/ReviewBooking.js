@@ -6,7 +6,7 @@ import SectionSeatSelectionCard from "../components/SectionSeatSelectionCard";
 import PickupAndDropCard from "../components/PickupAndDropCard";
 import Header from "../components/Header";
 
-const ReviewBookingTravellerDet = () => {
+const ReviewBooking = () => {
   return (
     <div className="relative bg-white w-full h-[2164px] overflow-hidden text-left text-xl text-gray-200 font-poppins">
       <Footer dimensionCode="/vector4.svg" socialTop="1877px" />
@@ -114,7 +114,7 @@ const ReviewBookingTravellerDet = () => {
             Travel Insurance
           </div>
         </div>
-        <div className="absolute my-0 mx-[!important] top-[0px] left-[11px] text-13xl font-semibold text-royalblue-100 z-[4]">
+        <div className="absolute top-[0px] left-[16px] p-1 text-13xl font-semibold text-royalblue-100 z-[4]">
           Review your booking
         </div>
       </div>
@@ -123,4 +123,4 @@ const ReviewBookingTravellerDet = () => {
   );
 };
 
-export default ReviewBookingTravellerDet;
+export default ReviewBooking;

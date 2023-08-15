@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 const BusLink = ({
   busOperatorName,
@@ -12,6 +14,11 @@ const BusLink = ({
   propWidth,
   propJustifyContent,
 }) => {
+  const navigate = useNavigate();
+  const onsearchButtonClick = useCallback(() => {
+    navigate("/review-booking");
+  }, [useNavigate]);
+
   const frameDivStyle = useMemo(() => {
     return {
       width: propWidth,
@@ -92,6 +99,7 @@ const BusLink = ({
         </div>
         <button
           className="cursor-pointer [border:none] p-0 bg-[transparent] absolute  top-[224px] left-[758px] w-[117px] h-[43px] z-[3]"
+          onClick={onsearchButtonClick}
           autoFocus
         >
           <img

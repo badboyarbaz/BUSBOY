@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import BusList from "./pages/BusList";
-import ReviewBookingTravellerDet from "./pages/ReviewBookingTravellerDet";
+import ReviewBooking from "./pages/ReviewBooking";
 import PaymentPortal from "./pages/PaymentPortal";
 import BookedTicket from "./pages/BookedTicket";
 import { useEffect } from "react";
@@ -68,8 +68,8 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="/bus-list" element={<BusList />} />
       <Route
-        path="/review-booking-traveller-details"
-        element={<ReviewBookingTravellerDet />}
+        path="/review-booking"
+        element={<ReviewBooking />}
       />
       <Route path="/payment-portal" element={<PaymentPortal />} />
       <Route path="/booked-ticket" element={<BookedTicket />} />
