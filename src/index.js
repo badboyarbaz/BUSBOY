@@ -1,11 +1,14 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot } from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
+import seatsReducer from './components/seatsReducer'; // Assuming your reducer's path
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 import "./global.css";
 
 const chakraTheme = extendTheme({
@@ -18,18 +21,22 @@ const emotionCache = createCache({
 
 const container = document.getElementById("root");
 const root = createRoot(container);
+const rootReducer = combineReducers({
+  seats: seatsReducer,
+});
+
+const store = createStore(rootReducer);
 
 root.render(
   <BrowserRouter>
     <CacheProvider value={emotionCache}>
       <ChakraProvider theme={chakraTheme}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </ChakraProvider>
     </CacheProvider>
   </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// rest of the code
