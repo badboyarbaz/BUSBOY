@@ -7,7 +7,8 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import seatsReducer from './components/seatsReducer'; // Assuming your reducer's path
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import "./global.css";
 
@@ -25,7 +26,7 @@ const rootReducer = combineReducers({
   seats: seatsReducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 root.render(
   <BrowserRouter>

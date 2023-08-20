@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleSeatSelection } from "./seatsActions";
 
 const SectionSeatSelectionCard = () => {
-  const seats = useSelector((state) => state.seats); // Assuming seats state is at the root level
+  const seatsState = useSelector((state) => state.seats);
+const seats = seatsState.seats;
   const dispatch = useDispatch();
 
   const handleSeatClick = (seatId) => {
     dispatch(toggleSeatSelection(seatId))};
 
-    const UpperDeckSingleRow = seats.slice(0, 5);
+    const UpperDeckSingleRow = seats.slice(0, 5) ;
     const UpperDeckDoubleRow = seats.slice(5, 15);
     const LowerDeckSingleRow = seats.slice(15, 20);
     const LowerDeckDoubleRow = seats.slice(20, 30);
@@ -28,7 +29,7 @@ const SectionSeatSelectionCard = () => {
       }
       return seatImage;
     }
-
+    console.log('Seats:', seats);
     return (
       <section className="rounded-3xs bg-white box-border w-[913px] h-[1086px] flex flex-col p-[45px] items-start justify-start relative gap-[30px] text-left text-base text-black font-poppins border-[1px] border-solid border-gray-400">
         <div className="w-[823px] flex flex-row py-2.5 px-0 box-border items-center justify-between z-[0] text-xl text-gray-200">
@@ -215,4 +216,5 @@ const SectionSeatSelectionCard = () => {
       </section>
     );
   };
+  
 export default SectionSeatSelectionCard;
