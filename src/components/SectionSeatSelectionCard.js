@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSeatSelection } from "./seatsActions";
+import { toggleSeatSelection } from "../redux/seatsActions";
 
 const SectionSeatSelectionCard = () => {
   const seatsState = useSelector((state) => state.seats);
@@ -77,7 +76,7 @@ const seats = seatsState.seats;
             <div className="absolute top-[0px] left-[55px] w-[714px] h-[284px]">
               <div className="absolute top-[153px] left-[150px] w-[714px] h-[131px] flex flex-col items-start justify-start">
                 <div className="upper-deck-single-seat-row">
-                  {UpperDeckSingleRow.map((seat, index) => (
+                  {UpperDeckSingleRow.map((seat) => (
                     <button
                       key={seat.id}
                       className={`cursor-pointer  
@@ -99,7 +98,7 @@ const seats = seatsState.seats;
               <div className="absolute top-[0px] left-[0px] w-[42px] h-[42px] flex flex-col items-start justify-start">
                 <div className="] absolute top-[33px] left-[153px] w-[500px] h-[100px] flex flex-row flex-wrap items-start justify-start gap-[8px] z-[0]">
                   <div className="upper-deck-double-seat-row">
-                    {UpperDeckDoubleRow.map((seat, index) => (
+                    {UpperDeckDoubleRow.map((seat) => (
                       <button
                         key={seat.id}
                         className={`cursor-pointer
@@ -137,7 +136,7 @@ const seats = seatsState.seats;
               <div className="absolute top-[150px] left-[0px] w-[714px] h-[100px] flex flex-col items-start justify-start">
                 <div className="] absolute top-[60px] left-[153px] flex flex-row items-center justify-center gap-[8px] z-[0]">
                   <div className="lower-deck-single-seat-row">
-                    {LowerDeckSingleRow.map((seat, index) => (
+                    {LowerDeckSingleRow.map((seat) => (
                       <button
                         key={seat.id}
                         className={`cursor-pointer
@@ -160,7 +159,7 @@ const seats = seatsState.seats;
               <div className="absolute top-[0px] left-[0px] w-[42px] h-[42px] flex flex-col items-start justify-start">
                 <div className="] absolute top-[74px] left-[154px] w-[500px] h-[100px] flex flex-row flex-wrap items-center justify-center gap-[8px] z-[0]">
                   <div className="lower-deck-double-seat-row">
-                    {LowerDeckDoubleRow.map((seat, index) => (
+                    {LowerDeckDoubleRow.map((seat) => (
                       <button
                         key={seat.id}
                         className={`cursor-pointer 

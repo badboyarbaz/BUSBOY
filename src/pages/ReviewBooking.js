@@ -5,14 +5,22 @@ import ApplyCodeForm from "../components/ApplyCodeForm";
 import SectionSeatSelectionCard from "../components/SectionSeatSelectionCard";
 import PickupAndDropCard from "../components/PickupAndDropCard";
 import Header from "../components/Header";
-
+import { useNavigate } from "react-router-dom";
+import { useCallback, useState } from "react";
 const ReviewBooking = () => {
+  const [selectedSeats, setSelectedSeats] = useState(0);
+
+  const navigate = useNavigate();
+  const onsearchButtonClick = useCallback(() => {
+    navigate("/payment-portal");
+  }, [useNavigate]);
+
   return (
     <div className="relative bg-white w-full h-[2164px] overflow-hidden text-left text-xl text-gray-200 font-poppins">
       <Footer dimensionCode="/vector4.svg" socialTop="1877px" />
       <div className="absolute top-[146px] left-[100px] w-[1720px] flex flex-row items-start justify-between">
         <section className="my-0 mx-[!important] absolute top-[6px] left-[942px] h-[1478px] flex flex-col items-start justify-start gap-[30px] z-[0] text-left text-xl text-gray-200 font-poppins">
-          <PassengerDetailsForm />
+          <PassengerDetailsForm selectedSeats={selectedSeats} />
           <div className="rounded-3xs bg-white box-border w-[778px] flex flex-col p-[50px] items-start justify-start gap-[30px] border-[1px] border-solid border-gray-400">
             <div className="self-stretch flex flex-row py-2.5 px-0 items-center justify-start relative gap-[622px]">
               <h1 className="m-0 relative text-[inherit] font-medium font-inherit z-[0]">
@@ -74,6 +82,7 @@ const ReviewBooking = () => {
             </div>
             <button
               className="cursor-pointer [border:none] py-[15px] px-0 bg-royalblue-100 rounded-3xs w-[703px] flex flex-row box-border items-center justify-between"
+              onClick={onsearchButtonClick}
               autoFocus
             >
               <div className="self-stretch flex-1 relative text-base font-semibold font-poppins text-white text-center">
