@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ propTextDecoration, propTextDecoration1 }) => {
   const myBookingStyle = useMemo(() => {
@@ -13,9 +15,15 @@ const Header = ({ propTextDecoration, propTextDecoration1 }) => {
     };
   }, [propTextDecoration1]);
 
+  const navigate = useNavigate();
+  const onSearchButtonClick = useCallback(() => {
+    navigate("/");
+  }, [navigate]);
+
   return (
-    <div className="absolute top-[0px] left-[0px] bg-white box-border w-[1920px] flex flex-row py-10 px-[100px] items-center justify-between text-left text-5xl text-royalblue-100 font-poppins border-[1px] border-solid border-gray-400">
-      <div className="relative font-semibold">
+    <div className="absolute top-[0px] left-[0px] bg-white box-border w-[1920px] flex flex-row py-10 px-[100px] items-center justify-between text-left text-3xl text-royalblue-100 font-poppins border-[1px] border-solid border-gray-400">
+      <div className="relative font-semibold cursor-pointer text-13xl"
+      onClick={onSearchButtonClick}>
         <span>BUS</span>
         <span className="text-gray-200">BOY</span>
       </div>
