@@ -129,21 +129,6 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
           }}
         />
       </div>
-
-      {/*<input
-        className="[border:none] font-medium font-poppins text-sm bg-[transparent] my-0 mx-[!important] absolute top-[0px] left-[356px] shadow-[0px_3px_4px_rgba(0,_0,_0,_0.25)] box-border w-[304px] overflow-hidden shrink-0 flex flex-row py-4 px-[25px] items-center justify-center z-[2] border-b-[1px] border-solid border-gray-400"
-        type="text"
-        placeholder="Bangalore, Karnataka"
-        required
-        autoFocus
-      />
-      <input
-        className="[border:none] font-medium font-poppins text-sm bg-[transparent] my-0 mx-[!important] absolute top-[0px] left-[0px] shadow-[0px_3px_4px_rgba(0,_0,_0,_0.25)] box-border w-[334px] overflow-hidden shrink-0 flex flex-row py-4 px-[25px] items-center justify-center z-[3] border-b-[1px] border-solid border-gray-400"
-        type="text"
-        placeholder="Aurangabad, Maharashtra"
-        required
-        autoFocus
-      />*/}
     </div>
   );
 };

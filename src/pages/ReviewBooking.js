@@ -5,15 +5,23 @@ import ApplyCodeForm from "../components/ApplyCodeForm";
 import SectionSeatSelectionCard from "../components/SectionSeatSelectionCard";
 import PickupAndDropCard from "../components/PickupAndDropCard";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 const ReviewBooking = () => {
   const [selectedSeats, setSelectedSeats] = useState(0);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const userIsAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
   const onsearchButtonClick = useCallback(() => {
+    if (userIsAuthenticated) {
     navigate("/payment-portal");
-  }, [useNavigate]);
+  } else {
+    navigate("/authentication/login", { state: { from: location.pathname } });
+  }
+}, [navigate, userIsAuthenticated, location]);
 
   return (
     <div className="relative bg-white w-full h-[2164px] overflow-hidden text-left text-xl text-gray-200 font-poppins">

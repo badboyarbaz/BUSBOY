@@ -25,6 +25,7 @@ module.exports = {
         black: "#000",
         tomato: "#ff6060",
         limegreen: "#31a91d",
+        unactiveblue: "#b9e4ff",
       },
       fontFamily: {
         poppins: "Poppins",

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import store from './redux/store'; // Import the store from the new location
-import { Provider } from 'react-redux';
+import store from "./redux/store"; // Import the store from the new location
+import { Provider } from "react-redux";
 import "./global.css";
 
 const chakraTheme = extendTheme({
@@ -21,13 +21,15 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-    <BrowserRouter>
-      <CacheProvider value={emotionCache}>
-        <ChakraProvider theme={chakraTheme}>
-          <Provider store={store}>
+  <BrowserRouter>
+    <CacheProvider value={emotionCache}>
+      <ChakraProvider theme={chakraTheme}>
+        <Provider store={store}>
+          <StrictMode>
             <App />
-          </Provider>
-        </ChakraProvider>
-      </CacheProvider>
-    </BrowserRouter>
+          </StrictMode>
+        </Provider>
+      </ChakraProvider>
+    </CacheProvider>
+  </BrowserRouter>
 );

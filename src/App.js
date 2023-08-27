@@ -1,14 +1,14 @@
 import {
-  Routes,
-  Route,
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 import Homepage from "./pages/Homepage";
 import BusList from "./pages/BusList";
 import ReviewBooking from "./pages/ReviewBooking";
 import PaymentPortal from "./pages/PaymentPortal";
 import BookedTicket from "./pages/BookedTicket";
+import Authentication from "./pages/Authentication";
 import { useEffect } from "react";
 
 function App() {
@@ -32,6 +32,10 @@ function App() {
         metaDescription = "";
         break;
       case "/bus-list":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/authentication":
         title = "";
         metaDescription = "";
         break;
@@ -71,6 +75,7 @@ function App() {
         path="/review-booking"
         element={<ReviewBooking />}
       />
+      <Route path="/authentication/*" element={<Authentication />} />
       <Route path="/payment-portal" element={<PaymentPortal />} />
       <Route path="/booked-ticket" element={<BookedTicket />} />
     </Routes>
