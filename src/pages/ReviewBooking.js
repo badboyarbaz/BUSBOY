@@ -6,53 +6,75 @@ import SectionSeatSelectionCard from "../components/SectionSeatSelectionCard";
 import PickupAndDropCard from "../components/PickupAndDropCard";
 import Header from "../components/Header";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { submitPassengerDetails } from "../redux/formAction";
+
 const ReviewBooking = () => {
   const [selectedSeats, setSelectedSeats] = useState(0);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const userIsAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-  const onsearchButtonClick = useCallback(() => {
-    if (userIsAuthenticated) {
-    navigate("/payment-portal");
-  } else {
-    navigate("/authentication/login", { state: { from: location.pathname } });
-  }
-}, [navigate, userIsAuthenticated, location]);
+  // Retrieve saved form data from Redux state
+  const savedFormData = useSelector((state) => state.form.passengerDetails);
+
+  const [formData, setFormData] = useState(savedFormData ? savedFormData : {
+    passengers: [
+      {
+        name: "",
+        gender: "",
+        age: "",
+      },
+    ],
+    mobile: "",
+    email: "",
+  });
+
+
+  // Populate form fields with saved data
+  useEffect(() => {
+    if (savedFormData && Object.keys(savedFormData).length > 0) {
+      setFormData(savedFormData);
+    }
+  }, [savedFormData]);
+
+  const formikRef = useRef();
+
+  const onBookNowClick = useCallback(() => {
+    console.log("onBookNowClick triggered");
+    // Trigger Formik's submitForm method
+    if (formikRef.current) { 
+      console.log("Formik ref exists", formikRef.current);
+
+      formikRef.current.submitForm().then(() => {
+        // Check if the form is valid and submitted successfully
+        if (formikRef.current && formikRef.current.isValid) {
+          console.log("Dispatching action with formik values:", formikRef.current.values);
+          dispatch(submitPassengerDetails(formikRef.current.values));
+          
+          if (userIsAuthenticated) {
+            navigate("/payment-portal");
+          } else {
+            navigate("/authentication/login", { state: { from: location.pathname } });
+          }
+        }else{
+          console.log("Formik ref is null");
+        }
+      }).catch((error) => {
+        console.log("Formik submitForm error:", error);
+      });
+    }
+  }, [navigate, userIsAuthenticated, location, dispatch, formData]);
 
   return (
     <div className="relative bg-white w-full h-[2164px] overflow-hidden text-left text-xl text-gray-200 font-poppins">
-      <Footer dimensionCode="/vector4.svg" socialTop="1877px" />
-      <div className="absolute top-[146px] left-[100px] w-[1720px] flex flex-row items-start justify-between">
+       <Header />
+      <main className="absolute top-[146px] left-[100px] w-[1720px] flex flex-row items-start justify-between">
         <section className="my-0 mx-[!important] absolute top-[6px] left-[942px] h-[1478px] flex flex-col items-start justify-start gap-[30px] z-[0] text-left text-xl text-gray-200 font-poppins">
-          <PassengerDetailsForm selectedSeats={selectedSeats} />
-          <div className="rounded-3xs bg-white box-border w-[778px] flex flex-col p-[50px] items-start justify-start gap-[30px] border-[1px] border-solid border-gray-400">
-            <div className="self-stretch flex flex-row py-2.5 px-0 items-center justify-start relative gap-[622px]">
-              <h1 className="m-0 relative text-[inherit] font-medium font-inherit z-[0]">
-                Contact Details
-              </h1>
-              <h3 className="my-0 mx-[!important] absolute top-[16px] left-[243px] text-xs font-medium font-inherit text-gray-400 z-[1]">
-                Your ticket info will be sent here
-              </h3>
-            </div>
-            <div className="self-stretch flex flex-row items-start justify-start gap-[30px]">
-              <input
-                className="[border:none] font-medium font-poppins text-sm bg-[transparent] flex-1 flex flex-row items-start justify-start"
-                type="text"
-                placeholder="Mobile Number"
-                required
-              />
-              <input
-                className="[border:none] font-medium font-poppins text-sm bg-[transparent] flex-1 flex flex-row items-start justify-start"
-                type="email"
-                placeholder="Email ID"
-                required
-              />
-            </div>
-          </div>
+          <PassengerDetailsForm selectedSeats={selectedSeats} formikRef={formikRef} formData={formData} setFormData={setFormData} />
+          
           <OfferCard />
           <ApplyCodeForm />
           <div
@@ -90,7 +112,7 @@ const ReviewBooking = () => {
             </div>
             <button
               className="cursor-pointer [border:none] py-[15px] px-0 bg-royalblue-100 rounded-3xs w-[703px] flex flex-row box-border items-center justify-between"
-              onClick={onsearchButtonClick}
+              onClick={onBookNowClick}
               autoFocus
             >
               <div className="self-stretch flex-1 relative text-base font-semibold font-poppins text-white text-center">
@@ -134,8 +156,8 @@ const ReviewBooking = () => {
         <div className="absolute top-[0px] left-[16px] p-1 text-13xl font-semibold text-royalblue-100 z-[4]">
           Review your booking
         </div>
-      </div>
-      <Header />
+      </main>
+      <Footer dimensionCode="/vector4.svg" socialTop="1877px" />
     </div>
   );
 };

@@ -5,8 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import store from "./redux/store"; // Import the store from the new location
 import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './redux/store';
 import "./global.css";
 
 const chakraTheme = extendTheme({
@@ -25,9 +26,11 @@ root.render(
     <CacheProvider value={emotionCache}>
       <ChakraProvider theme={chakraTheme}>
         <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <StrictMode>
             <App />
           </StrictMode>
+          </PersistGate>
         </Provider>
       </ChakraProvider>
     </CacheProvider>
