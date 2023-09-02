@@ -72,7 +72,7 @@ const ReviewBooking = () => {
     <div className="relative bg-white w-full h-[2164px] overflow-hidden text-left text-xl text-gray-200 font-poppins">
        <Header />
       <main className="absolute top-[146px] left-[100px] w-[1720px] flex flex-row items-start justify-between">
-        <section className="my-0 mx-[!important] absolute top-[6px] left-[942px] h-[1478px] flex flex-col items-start justify-start gap-[30px] z-[0] text-left text-xl text-gray-200 font-poppins">
+        <section className="absolute top-[6px] left-[942px] h-[1478px] flex flex-col items-start justify-start gap-[30px] z-[0] text-left text-xl text-gray-200 font-poppins">
           <PassengerDetailsForm selectedSeats={selectedSeats} formikRef={formikRef} formData={formData} setFormData={setFormData} />
           
           <OfferCard />
@@ -129,10 +129,10 @@ const ReviewBooking = () => {
             </button>
           </div>
         </section>
-        <div className="my-0 mx-[!important] absolute top-[6px] left-[4px] h-[1460px] flex flex-col items-start justify-start z-[1]">
+        <div className="absolute top-[6px] left-[4px] h-[1460px] flex flex-col items-start justify-start z-[1]">
           <SectionSeatSelectionCard />
         </div>
-        <div className="my-0 mx-[!important] absolute top-[1119px] left-[0px] rounded-3xs bg-white flex flex-col p-[45px] items-start justify-start gap-[30px] z-[2] border-[1px] border-solid border-gray-400">
+        <div className="absolute top-[1119px] left-[0px] rounded-3xs bg-white flex flex-col p-[45px] items-start justify-start gap-[30px] z-[2] border-[1px] border-solid border-gray-400">
           <div className="w-[823px] flex flex-row py-2.5 px-0 box-border items-center justify-start">
             <div className="flex flex-row items-center justify-start gap-[30px]">
               <div className="relative font-medium">{`Pickup & Drop`}</div>
@@ -142,7 +142,7 @@ const ReviewBooking = () => {
           <PickupAndDropCard />
         </div>
         <div
-          className="my-0 mx-[!important] absolute top-[1390px] left-[4px] flex flex-row items-start justify-start gap-[30px] z-[3] text-sm text-gray-100"
+          className="absolute top-[1390px] left-[4px] flex flex-row items-start justify-start gap-[30px] z-[3] text-sm text-gray-100"
           id="privacycard"
         >
           <div className="relative capitalize font-medium">

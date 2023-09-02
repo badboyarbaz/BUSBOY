@@ -3,6 +3,10 @@ export const SEAT_TYPES = {
     UNAVAILABLE: 'Unavailable',
     FEMALE: 'Female',
   };
+  
+  // clear seats constant
+  export const CLEAR_SEATS = 'CLEAR_SEATS';
+
 
 // CITIES constant 
 export const FETCH_CITIES_REQUEST = 'FETCH_CITIES_REQUEST';

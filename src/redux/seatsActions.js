@@ -1,7 +1,12 @@
 // seatsActions.js
 import { SEAT_TYPES } from './constants';
+import { CLEAR_SEATS } from './constants';
 
 export const TOGGLE_SEAT_SELECTION = 'TOGGLE_SEAT_SELECTION';
+
+export const clearSeats = () => ({
+  type: CLEAR_SEATS,
+});
 
 export function toggleSeatSelection(seatId) {
   return (dispatch, getState) => {

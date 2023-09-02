@@ -1,19 +1,23 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import seatsReducer from "./seatsReducer";
+import busReducer from "./busReducer";
 import cityReducer from "./cityReducer";
 import formReducer from "./formReducer";
 import authReducer from "./authReducer";
+import billReducer from "./billReducer";
 import { combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 // combining reducers first
 const rootReducer = combineReducers({
+  bus: busReducer,
   seats: seatsReducer,
   city: cityReducer,
   auth: authReducer,
   form: formReducer,
+  bill: billReducer,
 });
 
 // creating persistConfig and persistedReducer
