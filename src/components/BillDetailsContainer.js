@@ -55,7 +55,7 @@ const BillDetailsContainer = () => {
       <div className="relative text-xs font-medium text-gray-100">{`After Applying discount & Other offers`}</div>
       <div className="self-stretch flex flex-row items-center justify-between text-darkslategray">
         <div className="relative font-medium">Total Charge</div>
-        <div className="relative font-medium">₹{billDetails.baseFare ? billDetails.baseFare.toFixed(2) : "0.00"}</div>
+        <div className="relative font-medium">₹{billDetails.totalAmount.toFixed(2)}</div>
       </div>
     </div>
   );

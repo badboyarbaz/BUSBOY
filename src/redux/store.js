@@ -6,6 +6,8 @@ import cityReducer from "./cityReducer";
 import formReducer from "./formReducer";
 import authReducer from "./authReducer";
 import billReducer from "./billReducer";
+import paymentReducer from './paymentReducer';
+import ticketReducer from './ticketReducer';
 import { combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   form: formReducer,
   bill: billReducer,
+  payment: paymentReducer,
+  ticket: ticketReducer,
 });
 
 // creating persistConfig and persistedReducer

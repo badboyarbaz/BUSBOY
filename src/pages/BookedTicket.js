@@ -2,9 +2,22 @@ import Footer from "../components/Footer";
 import TicketDetailsForm from "../components/TicketDetailsForm";
 import QRCodeViewerContainer from "../components/QRCodeViewerContainer";
 import Header from "../components/Header";
+import { useEffect, useState } from "react";
+import {clearTicketDetails} from "../redux/ticketAction";
+import {useDispatch} from "react-redux";
 
 const BookedTicket = () => {
-  return (
+  const [ticketDetails, setTicketDetails] = useState(null);
+  /*  const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => {
+            dispatch(clearTicketDetails());
+        };
+    }, [dispatch]);*/
+
+
+    return (
     <div className="relative bg-white w-full h-[1490px] overflow-hidden text-left text-sm text-gray-100 font-poppins">
       <Footer dimensionCode="/vector4.svg" socialTop="1203px" />
       <div className="absolute top-[1092px] left-[734px] flex flex-row items-start justify-start gap-[30px]">
@@ -15,8 +28,8 @@ const BookedTicket = () => {
         <div className="relative capitalize font-medium">Travel Insurance</div>
       </div>
       <div className="absolute top-[448px] left-[210px] w-[1500px] h-[584px] flex flex-row items-center justify-between">
-        <TicketDetailsForm />
-        <QRCodeViewerContainer />
+            <TicketDetailsForm details={ticketDetails} />
+            <QRCodeViewerContainer details={ticketDetails} />
       </div>
       <div className="absolute top-[176px] left-[515px] w-[881px] h-[236px] text-13xl text-limegreen">
         <div className="absolute top-[130px] left-[0px] flex flex-col items-center justify-start gap-[10px]">

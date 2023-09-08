@@ -6,6 +6,8 @@ const PaymentCard = ({
   paymentOptions,
   propDisplay,
   propWidth,
+  setSelectedPaymentMethod,
+  toggleModal,
 }) => {
   const uPIPaymentStyle = useMemo(() => {
     return {
@@ -14,8 +16,13 @@ const PaymentCard = ({
     };
   }, [propDisplay, propWidth]);
 
+    const handleClick = () => {
+      setSelectedPaymentMethod(paymentMethodDescription);
+      toggleModal();
+    };
+
   return (
-    <button className="cursor-pointer [border:none] p-[25px] bg-white box-border w-[933.67px] flex flex-row items-center justify-between border-b-[1px] border-solid border-gray-400">
+    <button onClick={handleClick} className="cursor-pointer [border:none] p-[25px] bg-white box-border w-[933.67px] flex flex-row items-center justify-between border-b-[1px] border-solid border-gray-400">
       <div className="flex flex-row items-center justify-start gap-[30px]">
         <img
           className="relative rounded-3xs w-10 h-10 object-cover"

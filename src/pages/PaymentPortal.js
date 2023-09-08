@@ -4,7 +4,13 @@ import BillDetailsContainer from "../components/BillDetailsContainer";
 import PaymentModeForm from "../components/PaymentModeForm";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+
 const PaymentPortal = () => {
+    const stripePromise = loadStripe('pk_test_51Nk2OmSFsKpIJyxl3UNmPr3a3RdXUStn6KnXg6WShAtCvj2iUHL0K5Muj2KanUiqMIe25q7jSggXLrljyX6q14R300v0l81Akn');
+
   const billDetails = useSelector((state) => state.bill.billDetails);
 
   return (
@@ -20,7 +26,9 @@ const PaymentPortal = () => {
           <BookingConfirmationContainer />
           <BillDetailsContainer />
         </div>
+        <Elements stripe={stripePromise}>
         <PaymentModeForm />
+        </Elements>
       </main>
      
       <div className="flex flex-row p-[100px] gap-[30px] text-gray-100">
