@@ -47,9 +47,11 @@ const PaymentModeForm = () => {
     billDetails,
   };
 
+  
   const fetchClientSecret = async () => {
+    const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
     try {
-      const response = await axios.post("http://localhost:8800/api/payments", {
+      const response = await axios.post(`${apiUrl}/api/payment`, {
         amount: billDetails.totalAmount * 100,
       });
       console.log("Backend response:", response.data);
