@@ -44,7 +44,7 @@ const Footer = ({ dimensionCode, socialTop }) => {
         <img
           className="absolute h-[52.63%] w-[6.56%] top-[28.07%] right-[-163.05%] bottom-[19.3%] left-[256.48%] max-w-full overflow-hidden max-h-full z-[3]"
           alt=""
-          src={dimensionCode}
+          src="/vector4.svg"
         />
       </div>
       <div className="absolute top-[223px] left-[99px] w-[829px] flex flex-row items-start justify-start z-[3] text-base">
