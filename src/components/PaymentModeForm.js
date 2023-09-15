@@ -8,7 +8,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch } from "react-redux";
 import { paymentSuccess, paymentFailure } from "../redux/paymentAction";
 import { setTicketDetails } from "../redux/ticketAction";
-import { v4 as uuidv4 } from "uuid";
+import OfferCard from "./OfferCard";
 
 const PaymentModeForm = () => {
   const stripe = useStripe();
@@ -51,7 +51,7 @@ const PaymentModeForm = () => {
   const fetchClientSecret = async () => {
     const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
     try {
-      const response = await axios.post(`${apiUrl}/api/payment`, {
+      const response = await axios.post(`${apiUrl}/api/payments`, {
         amount: billDetails.totalAmount * 100,
       });
       console.log("Backend response:", response.data);
@@ -99,32 +99,24 @@ const PaymentModeForm = () => {
     }
   };
 
-  return (
-    <div className="h-[1131px] flex flex-col items-start justify-start gap-[30px] text-left text-5xl text-royalblue-100 font-poppins">
-      <div className="rounded-xl bg-white box-border w-[723px] flex flex-col p-[30px] items-start justify-center gap-[20px] border-[2px] border-dashed border-royalblue-100">
-        <div className="relative font-medium">Offers</div>
-        <div className="w-[353px] h-[68px] flex flex-col py-0 pr-0 pl-px box-border items-start justify-start gap-[20px] text-base text-gray-200">
-          <div className="flex flex-row items-center justify-center gap-[10px]">
-            <img className="relative w-5 h-5" alt="" src="/vector6.svg" />
-            <div className="relative font-medium">
-              50% off up to ₹100 | Use code BOOKNOW
-            </div>
-          </div>
-          <div className="flex flex-row items-center justify-center gap-[10px]">
-            <img className="relative w-5 h-5" alt="" src="/vector6.svg" />
-            <div className="relative font-medium">
-              20% off | Use code FIRSTTIME
-            </div>
-          </div>
-        </div>
+return (
+  <div className="flex flex-col items-start gap-8 text-5xl text-royalblue-100 font-poppins w-full">
+    {/* Offer Card */}
+    <OfferCard />
+
+    {/* Apply Code Form */}
+    <ApplyCodeForm />
+
+    {/* Payment Options Container */}
+    <div className="flex flex-col items-start gap-8 bg-white text-xl text-gray-200 w-full rounded-3xs border border-gray-400">
+      {/* Payment Options Header */}
+      <div className="flex flex-row py-2 px-4 items-center justify-start w-full">
+        <div className="font-medium">All Payment Options</div>
       </div>
-      <ApplyCodeForm propAlignSelf="unset" propWidth="723px" />
-      <div className="w-[736px] h-[686px] overflow-hidden shrink-0 flex flex-col items-start justify-start gap-[30px] text-xl text-gray-200">
-        <div className="w-[937px] flex flex-row py-2.5 px-[25px] box-border items-center justify-start">
-          <div className="relative font-medium">All Payment Options</div>
-        </div>
-        <div className="flex flex-col items-start justify-start gap-[30px]">
-          <PaymentCard
+
+      {/* Payment Cards */}
+      <div className="flex flex-col items-start gap-8 w-full">
+        <PaymentCard
             toggleModal={toggleModal}
             paymentMethodIcon="/rectangle-104@2x.png"
             setSelectedPaymentMethod={setSelectedPaymentMethod}
@@ -167,54 +159,59 @@ const PaymentModeForm = () => {
             propDisplay="inline-block"
             propWidth="unset"
           />
-        </div>
       </div>
-      <div className="rounded-3xs w-[723px] flex flex-row py-[15px] px-0 box-border items-center justify-between text-base text-tomato">
-        <div className="relative font-semibold">Cancel</div>
-      </div>
-      {/* Conditional rendering of Stripe form */}
-      {selectedPaymentMethod === "Credit / Debit Card" && isModalOpen && (
-        <div className="fixed  inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-10 m-10 rounded-lg shadow-lg lg:w-1/3 md:w-1/2 sm:w-[90%] ">
-            
-            <form className="space-y-4 ">
-              <div className="flex flex-col">
-              <span
-              className="relative flex flex-row top-0 right-[-550px] cursor-pointer w-10 h-5"
-              onClick={toggleModal}
-            >
-              &times;
-            </span>
-                <label className="text-lg font-medium p-2 ">Card Details</label>
-                <CardElement
-                  options={{
-                    style: {
-                      base: {
-                        fontSize: "20px",
-                        color: "#4A5568",
-                      },
-                    },
-                  }}
-                  className="p-4 border rounded  "
-                />
-              </div>
-              <button
-                type="submit"
-                onClick={handleSubmit}
-                className="bg-blue-500 text-white p-2 rounded"
-                disabled={!stripe}
-              >
-                Pay
-              </button>
-              {paymentStatus && (
-                <div className="text-center text-lg">{paymentStatus}</div>
-              )}
-            </form>
-          </div>
-        </div>
-      )}
     </div>
-  );
+
+    {/* Cancel Button */}
+    <div className="rounded flex flex-row py-4 px-0 items-center justify-center text-base border border-tomato rounded-3xs text-tomato w-full">
+      <div className="font-semibold">Cancel</div>
+    </div>
+
+    {/* Stripe Form (Conditional Rendering) */}
+    {selectedPaymentMethod === "Credit / Debit Card" && isModalOpen && (
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="bg-white p-4 m-4 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/3">
+          {/* Close Button */}
+          <span
+            className="absolute top-4 right-4 cursor-pointer"
+            onClick={toggleModal}
+          >
+            &times;
+          </span>
+
+          {/* Stripe Form */}
+          <form className="space-y-4">
+            <div className="flex flex-col">
+              <label className="text-lg font-medium p-2">Card Details</label>
+              <CardElement
+                options={{
+                  style: {
+                    base: {
+                      fontSize: "20px",
+                      color: "#4A5568",
+                    },
+                  },
+                }}
+                className="p-4 border rounded"
+              />
+            </div>
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="bg-blue-500 text-white p-2 rounded"
+              disabled={!stripe}
+            >
+              Pay
+            </button>
+            {paymentStatus && (
+              <div className="text-center text-lg">{paymentStatus}</div>
+            )}
+          </form>
+        </div>
+      </div>
+    )}
+  </div>
+);
 };
 
 export default PaymentModeForm;

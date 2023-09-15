@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { updateBillDetails } from "../redux/billActions";
 import { calculateFareDetails } from "../redux/utils";
-import { useMemo } from "react";
 import { getSelectedSeats } from "../redux/selectors";
 
 const BillDetailsContainer = () => {
@@ -32,32 +31,28 @@ const BillDetailsContainer = () => {
 
 
   return (
-    <div className="relative rounded-3xs bg-white flex flex-col p-[30px] items-start justify-center gap-[30px] text-left text-xl text-gray-200 font-poppins border-[1px] border-solid border-gray-400 flex-1 self-stretch">
-      <div className="self-stretch flex flex-col items-start justify-start gap-[20px]">
-        <div className="relative font-medium inline-block w-[643px]">
-          Bill details
-        </div>
-        <div className="self-stretch h-[74px] flex flex-col items-start justify-between text-xs text-gray-100">
-          <div className="self-stretch flex flex-row items-center justify-between">
-            <div className="relative font-medium">Base Ticket Fare</div>
-            <div className="relative font-medium">₹{billDetails.baseFare ? billDetails.baseFare.toFixed(2) : '0.00'}</div>
+      <div className="flex flex-col w-full md:w-full bg-white p-4 gap-4 rounded-3xs border border-s border-gray-400 text-black">
+        <div className="text-xl font-medium">Bill Details</div>
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-row justify-between items-center">
+            <span className="font-medium ">Base Ticket Fare</span>
+            <span className="font-medium ">₹{billDetails.baseFare ? billDetails.baseFare.toFixed(2) : '0.00'}</span>
           </div>
-          <div className="self-stretch flex flex-row items-center justify-between">
-            <div className="relative font-medium">Total Travellers</div>
-            <div className="relative font-medium">{billDetails.totalSeats}</div>
+          <div className="flex flex-row justify-between">
+            <span className="font-medium">Total Travellers</span>
+            <span className="font-medium">{billDetails.totalSeats}</span>
           </div>
-          <div className="self-stretch flex flex-row items-center justify-between">
-            <div className="relative font-medium">{`CGST & SGST`}</div>
-            <div className="relative font-medium">₹{billDetails.taxAmount ? billDetails.taxAmount.toFixed(2) : "0.00"}</div>
+          <div className="flex flex-row justify-between">
+            <span className="font-medium">CGST & SGST</span>
+            <span className="font-medium">₹{billDetails.taxAmount ? billDetails.taxAmount.toFixed(2) : "0.00"}</span>
           </div>
         </div>
+        <div className="text-sm font-medium text-gray-500">After Applying discount & Other offers</div>
+        <div className="flex flex-row justify-between text-darkslategray">
+          <span className="font-semibold ">Total Charge</span>
+          <span className="font-semibold">₹{billDetails.totalAmount.toFixed(2)}</span>
+        </div>
       </div>
-      <div className="relative text-xs font-medium text-gray-100">{`After Applying discount & Other offers`}</div>
-      <div className="self-stretch flex flex-row items-center justify-between text-darkslategray">
-        <div className="relative font-medium">Total Charge</div>
-        <div className="relative font-medium">₹{billDetails.totalAmount.toFixed(2)}</div>
-      </div>
-    </div>
   );
 };
 

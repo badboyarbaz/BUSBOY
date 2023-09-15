@@ -4,74 +4,78 @@ const TicketDetailsForm = () => {
 
   const ticketDetails = useSelector((state) => state.ticket.ticketDetails);
   const passengerInfo = useSelector((state) => state.form.passengerDetails);
-
   return (
-    <div className="rounded-3xs flex flex-col p-[50px] items-center justify-center gap-[30px] text-left text-base text-gray-200 font-poppins border-[1px] border-solid border-gray-400">
-      <div className="flex flex-col items-start justify-start gap-[20px]">
-        <div className="self-stretch flex flex-row items-center justify-between text-center">
-          <div className="relative font-medium">PNR No: {ticketDetails.ticketId}</div>
-          <div className="relative font-medium">
-            Transaction ID : 351511859256378
-          </div>
+    <div className="rounded flex flex-col bg-white p-8  md:mx-4 items-center justify-center gap-8 text-left text-base text-gray-200 font-poppins rounded-3xs border border-gray-400 w-full md:w-2/3">
+      {/* PNR and Transaction ID */}
+      <div className="flex flex-col w-full items-start justify-start gap-6">
+        <div className="flex flex-row items-center justify-between text-center w-full">
+          <div className="font-medium">PNR No: {ticketDetails.ticketId}</div>
+          <div className="font-medium">Transaction ID : 351511859256378</div>
         </div>
-        <div className="self-stretch relative text-xl font-medium"> {ticketDetails.selectedBus.name}</div>
-        <div className="w-[877px] flex flex-row items-center justify-start gap-[57px]">
-          <div className="w-[163px] h-[81px] flex flex-col items-start justify-start gap-[9px]">
-            <div className="relative font-medium">Nov 16</div>
-            <div className="relative">
-              <p className="m-0">{ticketDetails.selectedBus.departureTime}</p>
-              <p className="m-0">CIDCO, Aurangabad</p>
+  
+        {/* Bus Details */}
+        <div className="text-xl font-medium w-full">{ticketDetails.selectedBus.name}</div>
+        <div className="flex flex-row items-center justify-start gap-8 w-full">
+          {/* Departure Details */}
+          <div className="flex flex-col items-start justify-start gap-3">
+            <div className="font-medium">Nov 16</div>
+            <div>
+              <p>{ticketDetails.selectedBus.departureTime}</p>
+              <p>CIDCO, Aurangabad</p>
             </div>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-start gap-[5px] text-xs text-gray-400">
-            <div className="relative font-medium">8 hours</div>
-            <img
-              className="self-stretch relative max-w-full overflow-hidden h-[5.33px] shrink-0"
-              alt=""
-              src="/vector-12.svg"
-            />
+  
+          {/* Duration */}
+          <div className="flex flex-col items-center justify-start gap-2 text-xs text-nowrap text-gray-400">
+            <div className="font-medium">8 hours</div>
+            <img className='w-2/3 h-5 ' alt="" src="/vector-12.svg" />
           </div>
-          <div className="w-[152px] h-[106px] flex flex-col items-end justify-start gap-[10px]">
-            <div className="relative font-medium">Nov 17</div>
-            <div className="relative text-right">
-              <p className="m-0">{ticketDetails.selectedBus.arrivalTime}</p>
-              <p className="m-0">Dabuspet Highway</p>
-              <p className="m-0">Road, Bangalore</p>
+  
+          {/* Arrival Details */}
+          <div className="flex flex-col items-end justify-start gap-3">
+            <div className="font-medium">Nov 17</div>
+            <div className="text-right">
+              <p>{ticketDetails.selectedBus.arrivalTime}</p>
+              <p>Dabuspet Highway</p>
+              <p>Road, Bangalore</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="w-[877px] flex flex-row items-center justify-between">
-        <div className="relative font-medium">E-Tickets has been sent to:</div>
-        <div className="relative font-medium text-darkslategray text-right">
-          <p className="m-0">{passengerInfo.mobile}</p>
-          <p className="m-0">{passengerInfo.email}</p>
+  
+      {/* E-Tickets Info */}
+      <div className="flex flex-row items-center justify-between w-full">
+        <div className="font-medium">E-Tickets has been sent to:</div>
+        <div className="font-medium text-darkslategray text-right">
+          <p>{passengerInfo.mobile}</p>
+          <p>{passengerInfo.email}</p>
         </div>
       </div>
-      <div className="w-[877px] flex flex-col items-start justify-center gap-[10px]">
-        <div className="relative text-xl font-medium inline-block w-[877px]">
-          Traveller Details
-        </div>
-        <div className="relative font-medium">{ticketDetails.passengerDetails[0].name}</div>
-        <div className="self-stretch flex flex-row items-center justify-between text-dimgray">
-          <div className="relative font-medium">
-            <p className="m-0">Age : {ticketDetails.passengerDetails[0].age} Yrs</p>
-            <p className="m-0">Gender : {ticketDetails.passengerDetails[0].gender}</p>
+  
+      {/* Traveller Details */}
+      <div className="flex flex-col items-start justify-center gap-3 w-full">
+        <div className="text-xl font-medium w-full">Traveller Details</div>
+        <div className="font-medium">{ticketDetails.passengerDetails[0].name}</div>
+        <div className="flex flex-row items-center justify-between w-full text-dimgray">
+          <div className="font-medium">
+            <p>Age : {ticketDetails.passengerDetails[0].age} Yrs</p>
+            <p>Gender : {ticketDetails.passengerDetails[0].gender}</p>
           </div>
-          <div className="relative font-medium text-right">
-            <p className="m-0">Booking Status : Confirmed</p>
-            <p className="m-0">Seat no. : {ticketDetails.selectedSeats.map((seat) => seat.id).join(', ')}</p>
+          <div className="font-medium text-right">
+            <p>Booking Status : Confirmed</p>
+            <p>Seat no. : {ticketDetails.selectedSeats.map((seat) => seat.id).join(', ')}</p>
           </div>
         </div>
       </div>
-      <div className="w-[877px] flex flex-row items-start justify-between text-xl">
-        <div className="relative font-semibold">Total Fare</div>
-        <div className="relative font-semibold text-darkslategray">
+  
+      {/* Total Fare */}
+      <div className="flex flex-row items-start justify-between w-full text-xl">
+        <div className="font-semibold">Total Fare</div>
+        <div className="font-semibold text-darkslategray">
           ₹{ticketDetails.billDetails.totalAmount}
         </div>
       </div>
     </div>
-  );
-};
+  )};
 
 export default TicketDetailsForm;

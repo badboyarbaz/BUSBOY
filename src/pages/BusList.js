@@ -4,19 +4,20 @@ import SearchResultsContainer from "../components/SearchResultsContainer";
 import AvailableBusesList from "../components/AvailableBusesList";
 
 const BusList = () => {
-  return (
-    <div className="relative bg-whitesmoke w-full h-[1718px] overflow-hidden">
-        <Header />
-      <main className="relative top-[146px] left-[100px] w-screen flex flex-row items-start justify-between">
-        <div className="flex flex-col items-start justify-start ">
-          <SearchResultsContainer />
+    return (
+        <div className="relative bg-whitesmoke w-full h-auto">
+            <Header />
+            <main className="relative w-full flex flex-col lg:flex-row ">
+                <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start lg:order-2">
+                    <AvailableBusesList />
+                </div>
+                <div className="w-full lg:w-1/2 flex flex-col items-center  lg:order-1">
+                    <SearchResultsContainer />
+                </div>
+            </main>
+            <Footer dimensionCode="/vector3.svg" />
         </div>
-        <div className="flex flex-col items-start justify-start mr-[200px]">
-          <AvailableBusesList /></div>
-      </main>
-      <Footer dimensionCode="/vector3.svg" />
-    </div>
-  );
+    );
 };
 
 export default BusList;

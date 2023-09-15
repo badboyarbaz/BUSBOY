@@ -76,7 +76,7 @@ const CustomDatePicker = () => {
 };
 
 const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
-  <div className="absolute top-[100px] font-light font-poppins text-md bg-[transparent] shadow-[0px_3px_4px_rgba(0,_0,_0,_0.25)] w-[335px] flex flex-row gap-5 py-4 px-[25px] items-center justify-start border-b-[1px] border-solid border-gray-400" onClick={onClick} ref={ref}>
+  <div className="font-light font-poppins text-md bg-[transparent] shadow-[0px_3px_4px_rgba(0,_0,_0,_0.25)] w-[335px] flex flex-row gap-5 py-4 px-[25px] items-center justify-start border-b-[1px] border-solid border-gray-400" onClick={onClick} ref={ref}>
     <div>{value}</div>
     <img className="relative pl-7 ml-14" src="../calendericon.svg" alt="calendar icon" />
   </div>
@@ -84,21 +84,8 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
 
 
   return (
-    <div className="relative w-[660px] h-[257px] pt-20 m-10 flex flex-row items-start justify-start mt-[150px">
-      <button
-        className="cursor-pointer py-4 px-[25px] bg-royalblue-100 absolute top-[350px] left-[0px] rounded-3xs w-[724px] overflow-hidden shrink-0 flex flex-row flex-wrap box-border items-center justify-center active:animate-[0.5s_ease_0s_infinite_normal_none_shadow-pop-tr] active:opacity-[1]"
-        autoFocus
-        id="search"
-        onClick={onSearchButtonClick}
-      >
-        <div className="relative text-sm font-medium font-poppins text-white text-center">
-          Search for buses
-        </div>
-      </button>
-      <CustomDatePicker
-/>
-
-      <div className="relative w-[335px] top-[0px] left-[0px]">
+    <div className="relative w-full xl:grid xl:grid-cols-2 xl:grid-rows-3 xl:gap-4 md:w-[660px] h-[auto] pt-10 md:pl-5 flex flex-col md:flex-row items-start justify-start md:mt-[95px] mx-auto md:mx-0">
+      <div className="relative w-[350px] mx-auto md:mx-0 md:w-[335px] md:top-[0px] md:left-[0px] mb-4 xl:col-span-1 xl:row-span-1">
         <Autosuggest
           suggestions={suggestions}
           theme={autosuggestTheme}
@@ -114,7 +101,7 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
         />
       </div>
 
-      <div className="relative w-[335px] top-[0px] left-[50px]">
+      <div className="relative w-[350px] mx-auto md:mx-0 md:w-[335px] md:top-[0px] md:left-[50px] mb-4 xl:col-span-1 xl:row-span-1">
         <Autosuggest
           suggestions={suggestions}
           theme={autosuggestTheme}
@@ -129,6 +116,19 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
           }}
         />
       </div>
+      <div className="relative w-[350px] mx-auto md:mx-0 mb-4 xl:col-span-2 xl:row-span-1">
+      <CustomDatePicker />
+    </div>
+    <button
+  className="cursor-pointer py-4 px-[25px] bg-royalblue-100 w-[350px] mx-auto md:mx-0 rounded-3xs md:w-[724px] overflow-hidden flex items-center justify-center xl:col-span-2 xl:row-span-1"
+  autoFocus
+  id="search"
+  onClick={onSearchButtonClick}
+>
+  <div className="text-sm font-medium font-poppins text-white text-center">
+    Search for buses
+  </div>
+</button>
     </div>
   );
 };

@@ -1,63 +1,61 @@
-import React, { useMemo } from "react";
-import { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ propTextDecoration, propTextDecoration1 }) => {
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const user = useSelector((state) => state.auth.user);
-
-  const myBookingStyle = useMemo(() => {
-    return {
-      textDecoration: propTextDecoration,
-    };
-  }, [propTextDecoration]);
-
-  const loginSignStyle = useMemo(() => {
-    return {
-      textDecoration: propTextDecoration1,
-    };
-  }, [propTextDecoration1]);
-
   const navigate = useNavigate();
+
   const onSearchButtonClick = useCallback(() => {
     navigate("/");
   }, [navigate]);
 
-  const onLoginClick = useCallback (() => {
+  const onLoginClick = useCallback(() => {
     navigate("/authentication/login");
-  }, [navigate])
+  }, [navigate]);
 
   return (
-    <div className="absolute top-[0px] left-[0px] bg-white box-border w-[1920px] flex flex-row py-10 px-[100px] items-center justify-between text-left text-3xl text-royalblue-100 font-poppins border-[1px] border-solid border-gray-400">
-      <div className="relative font-semibold cursor-pointer text-13xl"
-      onClick={onSearchButtonClick}>
-        <span>BUS</span>
-        <span className="text-gray-200">BOY</span>
-      </div>
-      <div className="flex flex-row items-start justify-start gap-[60px] text-md text-darkslategray">
-        <a
-          className="relative font-medium text-[inherit]"
-          style={myBookingStyle}
-        >
-          My Booking
-        </a>
-        {user ? (
-        <div className="user-info relative font-medium text-royalblue-100">
-          <span>Hello, {user.name}!</span>
-          {user.avatar && <img src={user.avatar} alt={`${user.name}'s avatar`} />}
+      <div className="relative bg-white w-full flex flex-row py-4 lg:py-10 px-4 lg:px-[100px] items-center justify-between text-3xl text-royalblue-100 font-poppins border-b border-gray-400">
+        <div className="font-semibold cursor-pointer text-2xl lg:text-3xl" onClick={onSearchButtonClick}>
+          <span>BUS</span>
+          <span className="text-gray-200">BOY</span>
         </div>
-      ) : (
-        <a
-        className="cursor-pointer relative font-medium text-royalblue-100"
-        style={loginSignStyle}
-        onClick={onLoginClick}
-        >
-        Login / Sign Up
-      </a>
-      )}
-        
+        <div className="hidden lg:flex flex-row items-center gap-16 text-md text-darkslategray">
+          <a className="font-medium">My Booking</a>
+          {user ? (
+              <div className="user-info font-medium text-royalblue-100">
+                <span>Hello, {user.name}!</span>
+                {user.avatar && <img src={user.avatar} alt={`${user.name}'s avatar`} />}
+              </div>
+          ) : (
+              <a className="cursor-pointer font-medium text-royalblue-100" onClick={onLoginClick}>
+                Login / Sign Up
+              </a>
+          )}
+        </div>
+        <div className="lg:hidden flex items-center">
+          <button onClick={() => setMenuOpen(!menuOpen)}>
+            <img src="/hamburger-icon.svg" alt="Menu" />
+          </button>
+        </div>
+        {menuOpen && (
+            <div className="absolute top-full right-0 w-64 bg-white border border-gray-300 lg:hidden z-10">
+              <a className="block p-4 border-b" onClick={onLoginClick}>
+                My Booking
+              </a>
+              {user ? (
+                  <div className="p-4">
+                    <span>Hello, {user.name}!</span>
+                  </div>
+              ) : (
+                  <a className="block p-4" onClick={onLoginClick}>
+                    Login / Sign Up
+                  </a>
+              )}
+            </div>
+        )}
       </div>
-    </div>
   );
 };
 

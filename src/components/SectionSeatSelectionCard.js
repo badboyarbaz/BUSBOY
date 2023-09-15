@@ -3,217 +3,132 @@ import { toggleSeatSelection } from "../redux/seatsActions";
 
 const SectionSeatSelectionCard = () => {
   const seatsState = useSelector((state) => state.seats);
-const seats = seatsState.seats;
+  const seats = seatsState.seats;
   const dispatch = useDispatch();
 
   const handleSeatClick = (seatId) => {
-    dispatch(toggleSeatSelection(seatId))};
-
-    const UpperDeckSingleRow = seats.slice(0, 5) ;
-    const UpperDeckDoubleRow = seats.slice(5, 15);
-    const LowerDeckSingleRow = seats.slice(15, 20);
-    const LowerDeckDoubleRow = seats.slice(20, 30);
-
-    function getSeatImage(seat) {
-      let seatImage;
-      if (seat.type === "Female") {
-        seatImage = "bg-[url(../public/femaleseat.png)]";
-      } else if (seat.type === "Available") {
-        seatImage = "bg-[url(../public/availableseat.png)]";
-      } else {
-        seatImage = "bg-[url(../public/unavailableseat.png)]";
-      }
-      if (seat.selected) {
-        seatImage = "bg-[url(../public/selectedseat.png)]";
-      }
-      return seatImage;
-    }
-    console.log('Seats:', seats);
-    return (
-      <section className="rounded-3xs bg-white box-border w-[913px] h-[1086px] flex flex-col p-[45px] items-start justify-start relative gap-[30px] text-left text-base text-black font-poppins border-[1px] border-solid border-gray-400">
-        <div className="w-[823px] flex flex-row py-2.5 px-0 box-border items-center justify-between z-[0] text-xl text-gray-200">
-          {/* Seat Selection Banner */}
-          <div className="flex flex-row items-center justify-start gap-[30px]">
-            <div className="relative font-medium">Seat Selection</div>
-            <div className="relative text-xs px-5 font-medium text-gray-400">
-              Click on an Available seat to proceed with your transaction.
-            </div>
-          </div>
-          <div className="rounded-3xs bg-royalblue-300 w-[30px] h-[30px] flex flex-row p-[5px] box-border items-center justify-center">
-            <img
-              className="relative w-[15px] h-[15px]"
-              alt=""
-              src="/union.svg"
-            />{" "}
-          </div>
-        </div>
-        <div className="] absolute top-[144px] left-[63px] rounded-3xs bg-aliceblue overflow-hidden flex flex-row py-[29px] px-[145px] items-start justify-start gap-[50px] z-[1] text-lg">
-          <div className="relative font-medium">SEAT PRICE</div>
-          <button className="cursor-pointer py-2 px-[13px] bg-[transparent] rounded-3xs flex flex-row items-start justify-start border-[1px] border-solid border-royalblue-100">
-            <div className="relative text-xs font-medium font-poppins text-royalblue-100 text-left">
-              All
-            </div>
-          </button>
-          <button className="cursor-pointer py-2 px-[13px] bg-[transparent] rounded-3xs flex flex-row items-start justify-start border-[1px] border-solid border-royalblue-100">
-            <div className="relative text-xs font-medium font-poppins text-royalblue-100 text-left">
-              1600
-            </div>
-          </button>
-          <button className="cursor-pointer py-2 px-[13px] bg-[transparent] rounded-3xs flex flex-row items-start justify-start border-[1px] border-solid border-royalblue-100">
-            <div className="relative text-xs font-medium font-poppins text-royalblue-100 text-left">
-              1800
-            </div>
-          </button>
-          <button className="cursor-pointer py-2 px-[13px] bg-[transparent] rounded-3xs flex flex-row items-start justify-start border-[1px] border-solid border-royalblue-100">
-            <div className="relative text-xs font-medium font-poppins text-royalblue-100 text-left">
-              2000
-            </div>
-          </button>
-        </div>
-        {/* Upper Deck */}
-        <div className="absolute top-[283px] left-[63px] w-[770px] h-[610px] ">
-          <div className="absolute top-[326px] left-[1px] w-[769px] h-[284px]">
-            <div className="absolute top-[0px] left-[55px] w-[714px] h-[284px]">
-              <div className="absolute top-[153px] left-[150px] w-[714px] h-[131px] flex flex-col items-start justify-start">
-                <div className="upper-deck-single-seat-row">
-                  {UpperDeckSingleRow.map((seat) => (
-                    <button
-                      key={seat.id}
-                      className={`cursor-pointer  
-                    p-0 
-                    relative 
-                    w-[90px] 
-                    h-[50px] 
-                    bg-cover 
-                    bg-no-repeat 
-                    bg-[top]
-                    ${getSeatImage(seat)}`}
-                      onClick={() => handleSeatClick(seat.id)}
-                    >
-                      {seat.price}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="absolute top-[0px] left-[0px] w-[42px] h-[42px] flex flex-col items-start justify-start">
-                <div className="] absolute top-[33px] left-[153px] w-[500px] h-[100px] flex flex-row flex-wrap items-start justify-start gap-[8px] z-[0]">
-                  <div className="upper-deck-double-seat-row">
-                    {UpperDeckDoubleRow.map((seat) => (
-                      <button
-                        key={seat.id}
-                        className={`cursor-pointer
-                              p-0 
-                              relative 
-                              w-[90px] 
-                              h-[50px] 
-                              bg-cover 
-                              bg-no-repeat 
-                              bg-[top]
-                              ${getSeatImage(seat)}`}
-                              onClick={() => handleSeatClick(seat.id)}
-                      >
-                        {seat.price}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-[9px] left-[0px] font-medium">
-              Upper Deck
-            </div>
-          </div>
-          {/* Middle line */}
-          <img
-            className="absolute top-[310.5px] left-[125px] w-[600px] h-0.5"
-            alt=""
-            src="/line-1.svg"
-          />
-          {/* Lower Deck */}
-          <div className="absolute top-[0px] left-[0px] w-[769px] h-[284px] flex flex-row pt-px px-0 pb-0 box-border items-start justify-start">
-            <div className="relative font-medium">Lower Deck</div>
-            <div className="relative w-[714px] h-[222px] ml-[-36px]">
-              <div className="absolute top-[150px] left-[0px] w-[714px] h-[100px] flex flex-col items-start justify-start">
-                <div className="] absolute top-[60px] left-[153px] flex flex-row items-center justify-center gap-[8px] z-[0]">
-                  <div className="lower-deck-single-seat-row">
-                    {LowerDeckSingleRow.map((seat) => (
-                      <button
-                        key={seat.id}
-                        className={`cursor-pointer
-                              p-0 
-                              relative 
-                              w-[90px] 
-                              h-[50px] 
-                              bg-cover 
-                              bg-no-repeat 
-                              bg-[top]
-                              ${getSeatImage(seat)}`}
-                              onClick={() => handleSeatClick(seat.id)}
-                      >
-                        {seat.price}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute top-[0px] left-[0px] w-[42px] h-[42px] flex flex-col items-start justify-start">
-                <div className="] absolute top-[74px] left-[154px] w-[500px] h-[100px] flex flex-row flex-wrap items-center justify-center gap-[8px] z-[0]">
-                  <div className="lower-deck-double-seat-row">
-                    {LowerDeckDoubleRow.map((seat) => (
-                      <button
-                        key={seat.id}
-                        className={`cursor-pointer 
-                              p-0 
-                              relative 
-                              w-[90px] 
-                              h-[50px] 
-                              bg-cover 
-                              bg-no-repeat 
-                              bg-[top]
-                              ${getSeatImage(seat)}`}
-                              onClick={() => handleSeatClick(seat.id)}
-                      >
-                        {seat.price}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <img
-                className="absolute top-[95px] left-[94px] w-[35px] h-[42px] object-cover"
-                alt=""
-                src="/steering.png"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="] absolute top-[940px] left-[47px] rounded-3xs bg-aliceblue w-[800px] h-[102px] overflow-hidden shrink-0 flex flex-col py-[26px] px-[62px] box-border items-start justify-start z-[3]">
-          <div className="self-stretch flex-1 flex flex-row items-start justify-start relative">
-            <div className="] absolute top-[0px] left-[11px] flex flex-row items-start justify-start gap-[20px] z-[0]">
-              <div className="relative font-medium inline-block w-[102px] h-[27px] shrink-0">{`SEAT LEGEND `}</div>
-              <img
-                className="relative w-[74px] h-[50px] object-cover"
-                alt=""
-                src="/availableseat.png"
-              />
-              <div className="relative font-medium">AVAILABLE</div>
-              <img
-                className="relative w-[74px] h-[50px] object-cover"
-                alt=""
-                src="/unavailableseat.png"
-              />
-              <div className="relative font-medium">UNAVAILABLE</div>
-              <img
-                className="relative w-[74px] h-[50px] object-cover"
-                alt=""
-                src="/femaleseat.png"
-              />
-              <div className="relative font-medium">FEMALE</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    dispatch(toggleSeatSelection(seatId));
   };
-  
+
+  const getSeatImage = (seat) => {
+    let seatImage = seat.selected
+      ? "bg-[url(../public/selectedseat.png)]"
+      : seat.type === "Female"
+      ? "bg-[url(../public/femaleseat.png)]"
+      : seat.type === "Available"
+      ? "bg-[url(../public/availableseat.png)]"
+      : "bg-[url(../public/unavailableseat.png)]";
+    return seatImage;
+  };
+
+  const renderSeats = (seatArray) => {
+    return seatArray.map((seat) => (
+      <button
+        key={seat.id}
+        className={`cursor-pointer p-0 relative w-24 h-14 bg-cover bg-no-repeat bg-[top] transform rotate-90 ${getSeatImage(
+          seat
+        )}`}
+        onClick={() => handleSeatClick(seat.id)}
+      >
+        {seat.price}
+      </button>
+    ));
+  };
+
+  const UpperDeckSingleRow = seats.slice(0, 5);
+  const UpperDeckDoubleRow = seats.slice(5, 15);
+  const LowerDeckSingleRow = seats.slice(15, 20);
+  const LowerDeckDoubleRow = seats.slice(20, 30);
+
+  return (
+    <section className="flex flex-col w-full bg-white md:w-auto p-4 gap-4 border border-solid rounded-3xs border-gray-400">
+      {/* Header */}
+      <div className="flex flex-row justify-between text-xl">
+        <div className="font-medium">Seat Selection</div>
+        <div className="rounded bg-royalblue-300 w-8 h-8 flex items-center justify-center">
+          <img className="w-4 h-4" alt="" src="/union.svg" />
+        </div>
+      </div>
+
+      {/* Seat Price */}
+      <div className="flex flex-row items-center justify-center gap-3 text-xs md:text-lg rounded-lg bg-blue-50 py-2">
+        <div className="font-medium">SEAT PRICE</div>
+        {/* Price Buttons */}
+        {["All", "1600", "1800", "2000"].map((price) => (
+          <button
+            key={price}
+            className="cursor-pointer py-2 px-2 bg-[transparent] rounded border border-royalblue-100"
+          >
+            <div className="text-xs font-medium text-royalblue-100">
+              {price}
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Decks Container */}
+      <div className="flex flex-col md:flex-row gap-5 p-5 items-start">
+        {/* Upper Deck */}
+        <div className="">
+          <div className="font-medium">Upper Deck</div>
+          <div className="flex flex-row gap-2 pt-5">
+            {/* Single Row Seats */}
+            <div className="mr-4 space-y-10">
+              {renderSeats(UpperDeckSingleRow)}
+            </div>
+            {/* Double Row Seats */}
+            <div className="space-y-10 -mr-4">
+              {renderSeats(UpperDeckDoubleRow.slice(0, 5))}
+            </div>
+            <div className="space-y-10 -ml-4">
+              {renderSeats(UpperDeckDoubleRow.slice(5, 10))}
+            </div>
+          </div>
+        </div>
+
+        {/* Separator Line */}
+        <div className="hidden md:block md:w-1 md:h-[500px] md:bg-gray-400 md:mx-4 md:my-5"></div>
+        <div className="block md:hidden w-full h-0.5 bg-gray-400 my-4"></div>
+
+        {/* Lower Deck */}
+        <div className="">
+          <div className="font-medium">Lower Deck</div>
+          <div className="flex flex-row gap-2 pt-5 ">
+            {/* Single Row Seats */}
+            <div className="mr-4 space-y-10">
+              {renderSeats(LowerDeckSingleRow)}
+            </div>
+            {/* Double Row Seats */}
+            <div className="space-y-10 -mr-4">
+              {renderSeats(LowerDeckDoubleRow.slice(0, 5))}
+            </div>
+            <div className="space-y-10 -ml-4">
+              {renderSeats(LowerDeckDoubleRow.slice(5, 10))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-row items-center justify-center gap-4 text-lg rounded-lg bg-blue-50 py-2">
+          <div className="font-medium">SEAT LEGEND</div>
+          {[
+            { label: "AVAILABLE", imgSrc: "/availableseat.png" },
+            { label: "UNAVAILABLE", imgSrc: "/unavailableseat.png" },
+            { label: "FEMALE", imgSrc: "/femaleseat.png" },
+          ].map((legend) => (
+            <div key={legend.label} className="flex flex-col items-center pt-1">
+              <img
+                className="w-16 h-10 bg-cover transform rotate-90"
+                alt={legend.label}
+                src={legend.imgSrc}
+              />
+              <div className="text-xs font-medium text-royalblue-100 mt-2">
+                {legend.label}
+              </div>
+            </div>
+          ))}
+        </div>
+    </section>
+  );
+};
+
 export default SectionSeatSelectionCard;

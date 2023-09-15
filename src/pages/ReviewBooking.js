@@ -9,6 +9,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useCallback, useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { submitPassengerDetails } from "../redux/formAction";
+import BillDetailsContainer from "../components/BillDetailsContainer";
+import TermsAndCancellation from "../components/TermsAndCancellation";
 
 const ReviewBooking = () => {
   const [selectedSeats, setSelectedSeats] = useState(0);
@@ -69,95 +71,58 @@ const ReviewBooking = () => {
   }, [navigate, userIsAuthenticated, location, dispatch, formData]);
 
   return (
-    <div className="relative bg-white w-full h-[2164px] overflow-hidden text-left text-xl text-gray-200 font-poppins">
+    <div className="relative bg-whitesmoke w-full h-screen overflow-auto space-y-10 text-left text-xl text-gray-200 font-poppins">
        <Header />
-      <main className="absolute top-[146px] left-[100px] w-[1720px] flex flex-row items-start justify-between">
-        <section className="absolute top-[6px] left-[942px] h-[1478px] flex flex-col items-start justify-start gap-[30px] z-[0] text-left text-xl text-gray-200 font-poppins">
+      <main className="pt-2 px-4 md:px-10 flex flex-col md:flex-row items-start justify-between gap-8">
+        <div className="w-full md:w-1/2 flex flex-col items-start justify-start gap-8 text-left text-xl text-gray-200 font-poppins">
+          <div className="relative top-0 left-0 md:-mt-8 text-13xl font-semibold text-royalblue-100 z-[4]">
+            Review your booking
+          </div>
+          <div className="w-full md:w-1/2 flex flex-col items-start justify-start gap-8">
+            <SectionSeatSelectionCard />
+          </div>
+          <div className="flex w-full rounded-3xs bg-white flex flex-col p-8 items-start justify-start gap-8 border border-gray-400">
+            <div className="w-full flex flex-row py-2.5 px-0 box-border items-center justify-start">
+              <div className="flex flex-row items-center justify-start gap-[30px]">
+                <div className="relative font-medium">{`Pickup & Drop`}</div>
+                <div className="relative text-xs font-medium text-gray-400">{`Please select your pickup point and drop point  `}</div>
+              </div>
+            </div>
+            <PickupAndDropCard />
+          </div>
+          < TermsAndCancellation/>
+        </div>
+
+
+        <div className="w-full md:w-1/2 flex flex-col items-end justify-end gap-8 md:mt-12 text-left text-xl text-gray-200 font-poppins">
           <PassengerDetailsForm selectedSeats={selectedSeats} formikRef={formikRef} formData={formData} setFormData={setFormData} />
-          
           <OfferCard />
           <ApplyCodeForm />
-          <div
-            className="self-stretch rounded-3xs bg-white flex flex-col p-[30px] items-start justify-center gap-[30px] border-[1px] border-solid border-gray-400"
-            id="billdetails"
-          >
-            <div className="self-stretch flex flex-col items-start justify-start gap-[20px]">
-              <div className="relative font-medium inline-block w-[643px]">
-                Bill details
-              </div>
-              <div className="self-stretch h-[74px] flex flex-col items-start justify-between text-xs text-gray-100">
-                <div className="self-stretch flex flex-row items-center justify-between">
-                  <div className="relative font-medium">Base Ticket Fare</div>
-                  <div className="relative font-medium">₹2000.00</div>
-                </div>
-                <div className="self-stretch flex flex-row items-center justify-between">
-                  <div className="relative font-medium">Total Travellers</div>
-                  <div className="relative font-medium">3</div>
-                </div>
-                <div className="self-stretch flex flex-row items-center justify-between">
-                  <div className="relative font-medium">{`CGST & SGST`}</div>
-                  <div className="relative font-medium">₹500.00</div>
-                </div>
-              </div>
-            </div>
-            <div className="self-stretch flex flex-row items-center justify-between text-darkslategray">
-              <div className="relative font-medium">Total Charge</div>
-              <div className="relative font-medium">₹6500.00</div>
-            </div>
-          </div>
-          <div className="flex flex-col py-2.5 px-0 items-center justify-center gap-[20px] text-xs text-gray-100">
+          <BillDetailsContainer/>
+          <div className="flex flex-col w-full py-2 px-0 items-center justify-center gap-5 text-xs text-gray-100">
             <div className="relative font-medium">
               Discounts, offers and price concessions will be applied later
               during payment
             </div>
             <button
-              className="cursor-pointer [border:none] py-[15px] px-0 bg-royalblue-100 rounded-3xs w-[703px] flex flex-row box-border items-center justify-between"
+              className="cursor-pointer py-4 px-0 bg-royalblue-100 rounded-3xs w-full flex flex-row box-border items-center justify-between"
               onClick={onBookNowClick}
-              autoFocus
             >
               <div className="self-stretch flex-1 relative text-base font-semibold font-poppins text-white text-center">
                 Book Now
               </div>
             </button>
             <button
-              className="cursor-pointer [border:none] py-[15px] px-0 bg-[transparent] rounded-3xs w-[703px] flex flex-row box-border items-center justify-between"
-              autoFocus
+              className="cursor-pointer py-4 px-0 bg-[transparent] rounded-3xs w-full flex flex-row  border-solid border border-tomato items-center justify-between"
             >
               <div className="self-stretch flex-1 relative text-base font-semibold font-poppins text-tomato text-center">
                 Cancel
               </div>
             </button>
           </div>
-        </section>
-        <div className="absolute top-[6px] left-[4px] h-[1460px] flex flex-col items-start justify-start z-[1]">
-          <SectionSeatSelectionCard />
-        </div>
-        <div className="absolute top-[1119px] left-[0px] rounded-3xs bg-white flex flex-col p-[45px] items-start justify-start gap-[30px] z-[2] border-[1px] border-solid border-gray-400">
-          <div className="w-[823px] flex flex-row py-2.5 px-0 box-border items-center justify-start">
-            <div className="flex flex-row items-center justify-start gap-[30px]">
-              <div className="relative font-medium">{`Pickup & Drop`}</div>
-              <div className="relative text-xs font-medium text-gray-400">{`Please select your pickup point and drop point  `}</div>
-            </div>
-          </div>
-          <PickupAndDropCard />
-        </div>
-        <div
-          className="absolute top-[1390px] left-[4px] flex flex-row items-start justify-start gap-[30px] z-[3] text-sm text-gray-100"
-          id="privacycard"
-        >
-          <div className="relative capitalize font-medium">
-            Cancellation Policy
-          </div>
-          <div className="relative capitalize font-medium">{`Terms & Conditions`}</div>
-          <div className="relative capitalize font-medium">
-            Travel Insurance
-          </div>
-        </div>
-        <div className="absolute top-[0px] left-[16px] p-1 text-13xl font-semibold text-royalblue-100 z-[4]">
-          Review your booking
         </div>
       </main>
-      <Footer dimensionCode="/vector4.svg" socialTop="1877px" />
+      <Footer />
     </div>
   );
 };

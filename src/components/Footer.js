@@ -1,71 +1,94 @@
-import { useMemo } from "react";
 
-const Footer = ({ dimensionCode, socialTop }) => {
-  const footerStyle = useMemo(() => {
-    return {
-      top: socialTop,
-    };
-  }, [socialTop]);
+
+const Footer = () => {
 
   return (
     <footer
-      className="absolute bottom-0 inset-x-0  bg-royalblue-100 w-full h-[287px] flex flex-col p-[100px] box-border items-start justify-start gap-[60px] text-left text-5xl text-white font-poppins"
-      style={footerStyle}
+      className="relative inset-x-0 bg-royalblue-100 w-full h-[287px] flex flex-col p-13 md:p-4 box-border items-start justify-start text-left text-5xl text-white font-poppins lg:flex lg:flex-col lg:items-center lg:justify-center"
     >
-      <div className="absolute top-[208px] left-[1519px] w-[241px] flex flex-row items-center justify-between z-[0]">
-        <img
-          className="relative w-[27.5px] h-[32.5px]"
-          alt=""
-          src="/vector.svg"
-        />
-        <img className="relative w-[30px] h-[30px]" alt="" src="/vector1.svg" />
-        <img
-          className="relative w-[32.5px] h-[32.5px]"
-          alt=""
-          src="/vector2.svg"
-        />
+    <div className="sm:block md:block lg:hidden">
+      {/* Logo */}
+      <div>
+        <a className="relative top-3 inset-x-32 gap-y-10 md:top-0 md:left-0  font-semibold text-[inherit] md:text-center lg:text-left">
+          <span>BUS</span>
+          <span className="text-gray-200">BOY</span>
+        </a>
       </div>
-      <a className="[text-decoration:none] absolute top-[74px] left-[100px] font-semibold inline-block z-[1] text-[inherit]">
-        <span>BUS</span>
-        <span className="text-gray-200">BOY</span>
-      </a>
-      <div className="absolute top-[65px] left-[573px] w-[457px] flex flex-col items-start justify-start z-[2]">
-        <div className="relative font-semibold z-[0]">
-          Planning your next trip?
+
+      {/* Links */}
+      <div className="relative flex inset-x-10 pt-3">
+        <div className="relative top-5 flex flex-col lg:flex-row inset-x-10 justify-center items-center gap-3 text-base">
+          <a className="relative font-medium text-[inherit]">About us</a>
+          <a className="relative font-medium text-[inherit]">Mobile</a>
+          <a className="relative font-medium text-[inherit]">Privacy</a>
         </div>
-        <div className="relative text-sm font-medium z-[1]">{`Subscribe to our newsletter. Get the latest travel trends & deals!`}</div>
-        <input
-          className="[border:none] font-medium font-poppins text-sm bg-[transparent] absolute top-[2px] left-[610px] text-white text-left flex items-center w-[568px] h-[57px] shrink-0 z-[2]"
-          type="email"
-          placeholder="Enter Email ID"
-          required
-          autoFocus
-        />
+        <div className="relative top-5 flex flex-col lg:flex-row inset-x-20  justify-center items-center gap-3 text-base">
+          <a className="relative font-medium text-[inherit]">Terms of use</a>
+          <a className="relative font-medium text-[inherit]">Career</a>
+          <a className="relative font-medium text-[inherit]">Customer Service</a>
+        </div>
+      </div>
+
+
+      {/* Social Links */}
+      <div className="relative top-20 inset-x-20 space-x-20 w-1/2 flex flex-row items-center justify-between z-[0]">
         <img
-          className="absolute h-[52.63%] w-[6.56%] top-[28.07%] right-[-163.05%] bottom-[19.3%] left-[256.48%] max-w-full overflow-hidden max-h-full z-[3]"
-          alt=""
-          src="/vector4.svg"
+            className="w-[27.5px] h-[32.5px]"
+            alt=""
+            src="/vector.svg"
+        />
+        <img className=" w-[30px] h-[30px]" alt="" src="/vector1.svg" />
+        <img
+            className="w-[32.5px] h-[32.5px]"
+            alt=""
+            src="/vector2.svg"
         />
       </div>
-      <div className="absolute top-[223px] left-[99px] w-[829px] flex flex-row items-start justify-start z-[3] text-base">
-        <a className="[text-decoration:none] relative font-medium text-[inherit] inline-block w-[132px] h-[30px] shrink-0">
-          About us
-        </a>
-        <a className="[text-decoration:none] relative font-medium text-[inherit] inline-block w-[132px] h-[30px] shrink-0">
-          Mobile
-        </a>
-        <a className="[text-decoration:none] relative font-medium text-[inherit] inline-block w-[132px] h-[30px] shrink-0">
-          Privacy
-        </a>
-        <a className="[text-decoration:none] relative font-medium text-[inherit] inline-block w-[133px] h-[30px] shrink-0">
-          Terms of use
-        </a>
-        <a className="[text-decoration:none] relative font-medium text-[inherit] inline-block w-[132px] h-[30px] shrink-0">
-          Career
-        </a>
-        <a className="[text-decoration:none] relative font-medium text-[inherit] hover:[text-shadow:0px_4px_4px_rgba(0,_0,_0,_0.25)]">
-          Customer Service
-        </a>
+    </div>
+
+      {/* New Grid layout for lg and bigger devices */}
+      <div className="hidden lg:grid lg:grid-rows-2  lg:grid-cols-2 lg:gap-y-10 lg:gap-x-72 inset-0">
+        {/* 1st row, 1st col: Logo */}
+        <div className="flex items-center justify-start">
+          <a className="font-semibold">
+            <span>BUS</span>
+            <span className="text-gray-200">BOY</span>
+          </a>
+        </div>
+        {/* 1st row, 2nd col: Social Links */}
+        <div className="flex items-center justify-end">
+          <div className="flex items-center justify-between w-1/2">
+            <img className="w-[27.5px] h-[32.5px]" alt="" src="/vector.svg" />
+            <img className="w-[30px] h-[30px]" alt="" src="/vector1.svg" />
+            <img className="w-[32.5px] h-[32.5px]" alt="" src="/vector2.svg" />
+          </div>
+        </div>
+        {/* 2nd row, 1st col: Newsletter */}
+        <div className="flex items-center justify-start ">
+          <div>
+            <div className="font-semibold">Planning your next trip?</div>
+            <div className="text-sm font-medium">Subscribe to our newsletter. Get the latest travel trends & deals!</div>
+          </div>
+        </div>
+        {/* 2nd row, 2nd col: Input box and img */}
+        <div className="flex items-center justify-center">
+          <input
+              className="border-none font-medium font-poppins text-sm bg-transparent text-white w-full h-14"
+              type="email"
+              placeholder="Enter Email ID"
+              required
+          />
+          <img className="w-[6.56%] h-[52.63%]" alt="" src="/vector4.svg" />
+        </div>
+      </div>
+      {/* Bottom row: Links */}
+      <div className="relative lg:block hidden flex flex-row justify-between space-x-10 mt-5 mb-0 items-center text-base">
+        <a className="font-medium gap-2">About us</a>
+        <a className="font-medium gap-2">Mobile</a>
+        <a className="font-medium">Privacy</a>
+        <a className="font-medium">Terms of use</a>
+        <a className="font-medium">Career</a>
+        <a className="font-medium">Customer Service</a>
       </div>
     </footer>
   );

@@ -22,50 +22,48 @@ const CustomDatePicker = () => {
     newSelectedDate.setDate(selectedDate.getDate() + offset);
     setSelectedDate(newSelectedDate);
   };
-
   return (
-    <div className="flex flex-row items-center mt-8 justify-center w-[650px] h-[200px] text-left text-13xl text-royalblue-100 font-poppins">
-      <div className="absolute top-[0px] left-[0px] font-semibold">
-        Your Search Results
-      </div>
-      <div className="relative">
-        <button
-          className="relative flex flex-row items-start left-[-350px] top-8 pl-5"
-          onClick={() => handleDateChange(-1)}
-        >
-          <img className="relative w-30 h-16" alt="" src="/leftArrow.svg" />
-        </button>
-        <button
-          className="relative flex flex-row items-end left-[350px] bottom-8 pl-0"
-          onClick={() => handleDateChange(1)}
-        >
-          <img className="relative w-30 h-16" alt="" src="/rightArrow.svg" />
-        </button>
-      </div>
-      <ul className="m-0 absolute w-[650px] flex flex-row items-center justify-between">
-        <div className="">
-          <li className="flex flex-row items-center justify-between gap-8 cursor-pointer w-20">
-            {nextDates.map((date, index) => (
-              <div
-                key={index}
-                className={`${
-                  selectedDate.getTime() === date.getTime()
-                    ? 'bg-royalblue-100 rounded-3xs font-medium font-poppins'
-                    : 'bg-white rounded-3xs font-medium font-poppins'
-                }`}
-                onClick={() => setSelectedDate(date)}
-              >
-                <div className="relative flex flex-col items-center text-xl p-[15px] text-gray-200 text-center">
-                  <span>{date.toLocaleDateString('en-US', { weekday: 'short' })}</span>
-                  <span className="day">{date.getDate()}</span>
-                </div>
-              </div>
-            ))}
-          </li>
+      <div className="flex flex-col   w-full md:w-auto">
+        <div className="text-13xl border-b-2 font-semibold text-royalblue-400 justify-start mb-4 md:mb-0 md:mr-4">
+          Your Search Results
         </div>
-      </ul>
-    </div>
+        <div className="flex items-center justify-center">
+          <button
+              className="flex items-center mr-4"
+              onClick={() => handleDateChange(-1)}
+          >
+            <img className="w-8 h-4" alt="" src="/leftArrow.svg" />
+          </button>
+          <ul className="flex flex-wrap items-center p-2 lg:p-0 justify-between gap-4">
+            {nextDates.map((date, index) => (
+                <li
+                    key={index}
+                    className={` flex cursor-pointer rounded-md p-3 lg:p-4 ${
+                        selectedDate.getTime() === date.getTime()
+                            ? 'bg-royalblue-100 text-white'
+                            : 'bg-white'
+                    }`}
+                    onClick={() => setSelectedDate(date)}
+                >
+                  <div className="text-center">
+                <span className="block text-sm">
+                  {date.toLocaleDateString('en-US', { weekday: 'short' })}
+                </span>
+                    <span className="block text-xl">{date.getDate()}</span>
+                  </div>
+                </li>
+            ))}
+          </ul>
+          <button
+              className="flex items-center ml-4"
+              onClick={() => handleDateChange(1)}
+          >
+            <img className="w-8 h-4" alt="" src="/rightArrow.svg" />
+          </button>
+        </div>
+      </div>
   );
 };
+
 
 export default CustomDatePicker;

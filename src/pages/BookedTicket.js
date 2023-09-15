@@ -8,50 +8,49 @@ import {useDispatch} from "react-redux";
 
 const BookedTicket = () => {
   const [ticketDetails, setTicketDetails] = useState(null);
-  /*  const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        return () => {
-            dispatch(clearTicketDetails());
-        };
-    }, [dispatch]);*/
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(clearTicketDetails());
+    //     };
+    // }, [dispatch]);
 
 
     return (
-    <div className="relative bg-white w-full h-[1490px] overflow-hidden text-left text-sm text-gray-100 font-poppins">
-      <Footer dimensionCode="/vector4.svg" socialTop="1203px" />
-      <div className="absolute top-[1092px] left-[734px] flex flex-row items-start justify-start gap-[30px]">
-        <div className="relative capitalize font-medium">
-          Cancellation Policy
-        </div>
-        <div className="relative capitalize font-medium">{`Terms & Conditions`}</div>
-        <div className="relative capitalize font-medium">Travel Insurance</div>
-      </div>
-      <div className="absolute top-[448px] left-[210px] w-[1500px] h-[584px] flex flex-row items-center justify-between">
-            <TicketDetailsForm details={ticketDetails} />
-            <QRCodeViewerContainer details={ticketDetails} />
-      </div>
-      <div className="absolute top-[176px] left-[515px] w-[881px] h-[236px] text-13xl text-limegreen">
-        <div className="absolute top-[130px] left-[0px] flex flex-col items-center justify-start gap-[10px]">
-          <div className="relative font-medium">
+      <div className="relative bg-whitesmoke w-full min-h-screen overflow-hidden text-left text-sm text-gray-100 font-poppins flex flex-col items-center">
+        {/* Header */}
+        <Header />
+    
+        {/* Congratulations Message */}
+        <img className="flex flex-col py-2 px-4" src="/vector9.svg"></img>
+        <div className="text-5xl text-limegreen mt-5 p-2 text-center">
+          <div className="font-medium">
             Congratulations! You have successfully booked tickets
           </div>
-          <div className="relative text-base font-medium text-gray-100 whitespace-pre-wrap text-center">
-            <p className="m-0">{`please carry  SMS / Mail sent to your contact details, `}</p>
-            <p className="m-0">
-              Please report your self before 15 mins of departure time.
-            </p>
+          <div className="text-base font-medium text-gray-100 text-center mt-2">
+            <p>Please carry SMS/Mail sent to your contact details,</p>
+            <p>Please report yourself before 15 mins of departure time.</p>
           </div>
         </div>
-        <img
-          className="absolute h-[42.37%] w-[11.35%] top-[0%] right-[42.68%] bottom-[57.63%] left-[45.97%] max-w-full overflow-hidden max-h-full"
-          alt=""
-          src="/vector9.svg"
-        />
+    
+        {/* Ticket and QR Code Section */}
+        <div className="flex flex-col md:flex-row w-full justify-between mt-10 px-4 gap-3">
+          <TicketDetailsForm details={ticketDetails} />
+          <QRCodeViewerContainer details={ticketDetails} />
+        </div>
+    
+        {/* Footer Links */}
+        <div className="flex flex-row items-center justify-center gap-8 mt-10 mb-10">
+          <div className="font-medium">Cancellation Policy</div>
+          <div className="font-medium">Terms & Conditions</div>
+          <div className="font-medium">Travel Insurance</div>
+        </div>
+    
+        {/* Footer */}
+        <Footer dimensionCode="/vector4.svg" />
       </div>
-      <Header propTextDecoration="unset" propTextDecoration1="unset" />
-    </div>
-  );
-};
+    )};
+
 
 export default BookedTicket;
