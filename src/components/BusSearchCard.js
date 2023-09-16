@@ -84,7 +84,7 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
 
 
   return (
-    <div className="relative w-full xl:grid xl:grid-cols-2 xl:grid-rows-3 xl:gap-4 md:w-[660px] h-[auto] pt-10 md:pl-5 flex flex-col md:flex-row items-start justify-start md:mt-[95px] mx-auto md:mx-0">
+    <div className="relative w-full xl:grid xl:grid-cols-2 xl:grid-rows-3 xl:gap-4 md:w-[660px] h-[auto] pt-10 md:pl-5 flex flex-col md:flex-row items-start justify-start md:mt-5 mb-10 mx-auto md:mx-0">
       <div className="relative w-[350px] mx-auto md:mx-0 md:w-[335px] md:top-[0px] md:left-[0px] mb-4 xl:col-span-1 xl:row-span-1">
         <Autosuggest
           suggestions={suggestions}

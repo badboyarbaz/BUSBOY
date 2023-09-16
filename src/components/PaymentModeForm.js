@@ -169,14 +169,19 @@ return (
 
     {/* Stripe Form (Conditional Rendering) */}
     {selectedPaymentMethod === "Credit / Debit Card" && isModalOpen && (
-      <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="fixed inset-0 flex flex-col items-center justify-center z-50">
+        <span className="text-sm text-tomato bg-white">
+            use 424242424242424242 as the card number <br/>
+            and any future month/year as the expiration <br/>
+            random number for cvv/zip <br/>
+          </span>
         <div className="bg-white p-4 m-4 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/3">
           {/* Close Button */}
           <span
-            className="absolute top-4 right-4 cursor-pointer"
+            className="relative top-0 inset-x-3/4 text-base cursor-pointer"
             onClick={toggleModal}
           >
-            &times;
+            &times; Close
           </span>
 
           {/* Stripe Form */}

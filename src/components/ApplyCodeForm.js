@@ -1,26 +1,18 @@
-import { useMemo } from "react";
+const ApplyCodeForm = () => {
 
-const ApplyCodeForm = ({ propAlignSelf, propWidth }) => {
-  const frameDiv1Style = useMemo(() => {
-    return {
-      alignSelf: propAlignSelf,
-      width: propWidth,
-    };
-  }, [propAlignSelf, propWidth]);
 
   return (
     <div
-      className="self-stretch rounded-3xs bg-white flex flex-col p-[30px] items-start justify-center text-left text-xl text-gray-200 font-poppins border-[1px] border-solid border-gray-400"
+      className="self-stretch rounded-md bg-white flex flex-col p-8 md:p-6 lg:p-4 items-start justify-center text-left text-xl md:text-lg lg:text-base text-gray-200 font-poppins border border-gray-400"
       id="offercode"
-      style={frameDiv1Style}
     >
-      <div className="self-stretch flex flex-row items-center justify-center gap-[30px]">
-        <div className="flex flex-row items-center justify-start gap-[10px]">
-          <img className="relative w-8 h-8" alt="" src="/vector7.svg" />
-          <div className="relative font-medium">Apply Code</div>
+      <div className="self-stretch flex flex-row items-center justify-center gap-5 md:gap-6 lg:gap-4">
+        <div className="flex flex-row items-center justify-start gap-4 md:gap-3 lg:gap-2">
+          <img className="w-6 h-6 md:w-7 md:h-7 lg:w-6 lg:h-6" alt="" src="/vector7.svg" />
+          <div className="font-medium">Apply Code</div>
         </div>
         <input
-          className="[border:none] font-medium font-poppins text-sm bg-[transparent] flex-1 flex flex-col py-[18px] px-[25px] items-start justify-start border-b-[1px] border-solid border-gray-400"
+          className="border-none font-medium text-sm bg-transparent flex-1 flex flex-col py-4 md:py-3 lg:py-2 px-3 md:px-5 lg:px-4 items-start justify-start border-b border-gray-400"
           type="text"
           placeholder="Enter Code"
         />

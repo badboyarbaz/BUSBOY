@@ -51,6 +51,12 @@ return (
 
     {/* Main Content */}
     <main className="flex flex-col items-center justify-center md:mt-6 font-poppins px-2">
+      <div className="bg-white">
+        <span className="text-tomato">
+          use test@test.com as email <br/>
+          use 1234 as password
+        </span>
+      </div>
       <div className="flex flex-col m-10 w-full md:w-1/2 lg:w-1/3 bg-white p-8 rounded-md border border-gray-400 shadow-lg">
         <h1 className="m-10 text-2xl leading-6 font-medium">
           Login to{" "}
