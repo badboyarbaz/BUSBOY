@@ -63,16 +63,16 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
         <form className="flex flex-col bg-white w-full p-4 gap-4 rounded-3xs border border-solid border-gray-400">
           <h1 className="text-xl font-medium">Passenger Details</h1>
           {selectedSeats.map((seat, index) => (
-            <div key={index} className="flex flex-col md:flex-row gap-4">
+            <div key={index} className="flex flex-col lg:flex-row gap-4">
               <Field
                 className="flex-1 p-2 border-b rounded-3xs h-12"
                 name={`passengers[${index}].name`}
                 type="text"
                 placeholder={`Passenger ${index + 1} Name (Seat ID: ${seat.id})`}
               />
-              <div className="relative flex flex-col flex-1">
+              <div className="relative flex flex-row">
                 <button
-                  className={`flex-1 p-2 border-solid border border-royalblue-100 min-w-10 text-nowrap text-sm h-12 rounded-3xs hover:bg-royalblue-100 ${openGenderDropdowns[index] ? 'bg-royalblue-100' : ''}`}
+                  className={`flex-1 p-2 min-w-full border-solid border border-royalblue-100 w-20 text-nowrap text-sm h-12 rounded-3xs hover:bg-royalblue-100 ${openGenderDropdowns[index] ? 'bg-royalblue-100' : ''}`}
                   onClick={(e) => {
                     e.preventDefault(); 
                     toggleDropdown("gender", index);
@@ -100,7 +100,7 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
               </div>
               <div className="relative flex flex-row ">
                 <button
-                  className={`flex-1 p-2 border-solid border border-royalblue-100 min-w-10 h-12 text-sm rounded-3xs  hover:bg-royalblue-100 ${openAgeDropdowns[index] ? 'bg-royalblue-100' : ''}`}
+                  className={`flex-1 p-2 min-w-full border-solid border border-royalblue-100 h-12 text-sm rounded-3xs  hover:bg-royalblue-100 ${openAgeDropdowns[index] ? 'bg-royalblue-100' : ''}`}
                   onClick={(e) => {
                     e.preventDefault(); 
                     toggleDropdown("age", index);
@@ -137,7 +137,7 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
                     Your ticket info will be sent here
                   </h3>
                 </div>
-                <div className="self-stretch flex flex-col md:flex-row text-center px-4 py-2 items-start justify-start gap-5">
+                <div className="self-stretch flex flex-col lg:flex-row text-center px-4 py-2 items-start justify-start gap-5">
                   <Field
                     className="h-10 font-medium font-poppins text-base bg-[transparent] flex-1 flex items-start justify-start"
                     name="mobile"

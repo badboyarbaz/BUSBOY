@@ -1,84 +1,35 @@
 import BusLink from "./BusLink";
-
-
+import { getBuses } from "../services/busService";
+import { useEffect, useState } from 'react';
 
 const AvailableBusesList = () => {
-  const busLinksData = [
-    {
-      busOperatorName: 'Humsafar Travels',
-      departureCity: 'Aurangabad',
-      destinationCity: 'Bangalore',
-      sleeperBusType: 'Type 1',
-      busDepartureTime: '04:30',
-      busArrivalTime: '08:30',
-      availableSeats: '20',
-      busDepartureDate: 'Nov 16',
-      busArrivalDate: 'Nov 17' ,
-      journeyDuration: '8 hours',
-      propHeight: '300px',
-      propWidth : '900px',
-      propJustifyContent: 'flex-end',
-    },
-    {
-      busOperatorName: 'Musafir Travels',
-      departureCity: 'Aurangabad',
-      destinationCity: 'Bangalore',
-      sleeperBusType: 'Type 1',
-      busDepartureTime: '04:30',
-      busArrivalTime: '08:30',
-      availableSeats: '20',
-      busDepartureDate: 'Nov 16',
-      busArrivalDate: 'Nov 17' ,
-      journeyDuration: '8 hours',
-      propHeight: '300px',
-      propWidth : '900px',
-      propJustifyContent: 'flex-end',
-    },
-    {
-      busOperatorName: 'Dolphin Travels',
-      departureCity: 'Aurangabad',
-      destinationCity: 'Bangalore',
-      sleeperBusType: 'Type 1',
-      busDepartureTime: '04:30',
-      busArrivalTime: '08:30',
-      availableSeats: '20',
-      busDepartureDate: 'Nov 16',
-      busArrivalDate: 'Nov 17' ,
-      journeyDuration: '8 hours',
-      propHeight: '300px',
-      propWidth : '900px',
-      propJustifyContent: 'flex-end',
-    },
-    {
-      busOperatorName: 'VRL Travels',
-      departureCity: 'Aurangabad',
-      destinationCity: 'Bangalore',
-      sleeperBusType: 'Type 1',
-      busDepartureTime: '04:30',
-      busArrivalTime: '08:30',
-      availableSeats: '20',
-      busDepartureDate: 'Nov 16',
-      busArrivalDate: 'Nov 17' ,
-      journeyDuration: '8 hours',
-      propHeight: '300px',
-      propWidth : '900px',
-      propJustifyContent: 'flex-end',
-    },
-  ];
+  const [busLinksData, setBusLinksData] = useState([]);
+  
+  useEffect(() => {
+    const fetchBuses = async () => {
+      try {
+        const buses = await getBuses();
+        setBusLinksData(buses);
+        console.log(buses);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchBuses();
+  }, []);
+
   return (
-      <div className="w-full h-screen md:h-auto overflow-y-auto">
-        <div className="flex flex-col items-center justify-start">
-          <div className="w-full flex justify-between items-center border-b border-gray-400 py-2">
-            <div className="flex items-center gap-8 h-14">
-              <div className="font-medium text-3xl ml-2">Available Buses</div>
-              <div className="text-md font-medium text-gray-100">
+      <div className="w-full h-full px-4 py-4 overflow-hidden">
+        <div className="flex flex-col items-center justify-start gap-4">
+          <div className="flex items-center justify-between w-full px-4 py-3 border-b border-gray-100">
+              <p className="text-lg font-medium">Available Buses</p>
+              <p className="ml-20 text-xs font-medium text-gray-100">
                 5 Buses available
-              </div>
-            </div>
+              </p>
             <img className="w-8 h-8 mr-2" alt="" src="/group-2876.svg" />
           </div>
 
-          <ul className="w-full flex flex-col items-center pl-0">
+          <ul className="flex flex-col items-center w-full h-screen gap-8 pl-0 overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-royalblue-100 scrollbar-thumb-rounded ">
             {busLinksData.map((busLinkData, index) => (
                 <BusLink key={index} {...busLinkData} />
             ))}

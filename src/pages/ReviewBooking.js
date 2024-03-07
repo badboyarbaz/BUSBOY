@@ -73,15 +73,15 @@ const ReviewBooking = () => {
   return (
     <div className="relative bg-whitesmoke w-full h-screen overflow-auto space-y-10 text-left text-xl text-gray-200 font-poppins">
        <Header />
-      <main className="pt-2 px-4 md:px-10 flex flex-col md:flex-row items-start justify-between gap-8">
-        <div className="w-full md:w-1/2 flex flex-col items-start justify-start gap-8 text-left text-xl text-gray-200 font-poppins">
-          <div className="relative top-0 left-0 md:-mt-8 text-13xl font-semibold text-royalblue-100 z-[4]">
+      <main className="pt-2 px-4 lg:px-10 flex flex-col xl:flex-row items-start justify-between gap-8">
+        <div className="w-full lg:w-full flex flex-col items-start justify-start gap-8 text-left text-xl text-gray-200 font-poppins">
+          <div className="relative top-0 left-0 lg:-mt-8 text-13xl font-semibold text-royalblue-100 z-[4]">
             Review your booking
           </div>
-          <div className="w-full md:w-1/2 flex flex-col items-start justify-start gap-8">
+          <div className="w-full lg:w-full flex flex-col items-start justify-start gap-8">
             <SectionSeatSelectionCard />
           </div>
-          <div className="flex w-full rounded-3xs bg-white flex flex-col p-8 items-start justify-start gap-8 border border-gray-400">
+          <div className="flex w-full rounded-3xs bg-white flex-col p-8 items-start justify-start gap-8 border border-gray-400">
             <div className="w-full flex flex-row py-2.5 px-0 box-border items-center justify-start">
               <div className="flex flex-row items-center justify-start gap-[30px]">
                 <div className="relative font-medium">{`Pickup & Drop`}</div>
@@ -94,7 +94,7 @@ const ReviewBooking = () => {
         </div>
 
 
-        <div className="w-full md:w-1/2 flex flex-col items-end justify-end gap-8 md:mt-12 text-left text-xl text-gray-200 font-poppins">
+        <div className="w-full lg:w-1/2 flex flex-col items-end justify-end gap-8 lg:mt-12 text-left text-xl text-gray-200 font-poppins">
           <PassengerDetailsForm selectedSeats={selectedSeats} formikRef={formikRef} formData={formData} setFormData={setFormData} />
           <OfferCard />
           <ApplyCodeForm />
