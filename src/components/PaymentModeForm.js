@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import ApplyCodeForm from "./ApplyCodeForm";
 import PaymentCard from "./PaymentCard";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch } from "react-redux";
 import { paymentSuccess, paymentFailure } from "../redux/paymentAction";
 import { setTicketDetails } from "../redux/ticketAction";
-import OfferCard from "./OfferCard";
 
 const PaymentModeForm = () => {
   const stripe = useStripe();
@@ -18,12 +16,11 @@ const PaymentModeForm = () => {
   const selectedSeats = allSeats.filter((seat) => seat.selected);
   const selectedCity = useSelector((state) => state.city.selectedCity);
   const passengerDetails = useSelector(
-    (state) => state.form.passengerDetails.passengers
+    (state) => state.form.passengerDetails.passengers,
   );
   const billDetails = useSelector((state) => state.bill.billDetails);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,9 +44,11 @@ const PaymentModeForm = () => {
     billDetails,
   };
 
-  
   const fetchClientSecret = async () => {
-    const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
+    const apiUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.REACT_APP_API_URL_PROD
+        : process.env.REACT_APP_API_URL_DEV;
     try {
       const response = await axios.post(`${apiUrl}/api/payments`, {
         amount: billDetails.totalAmount * 100,
@@ -95,128 +94,120 @@ const PaymentModeForm = () => {
         dispatch(paymentSuccess(paymentDetails));
       }
       dispatch(setTicketDetails(ticketDetails));
-      navigate('/booked-ticket');
+      navigate("/booked-ticket");
     }
   };
 
-return (
-  <div className="flex flex-col items-start gap-8 text-5xl text-royalblue-100 font-poppins w-full">
-    {/* Offer Card */}
-    <OfferCard />
+  return (
+    <div className="flex flex-col w-full items-start gap-2">
+      {/* Payment Options Container */}
+      <div className="flex flex-col items-start bg-white w-full rounded-xl border border-gray-400">
+        {/* Payment Options Header */}
+        <div className="flex flex-row py-2 px-4 items-center justify-start w-full">
+          <h1 className="font-medium">All Payment Options</h1>
+        </div>
 
-    {/* Apply Code Form */}
-    <ApplyCodeForm />
-
-    {/* Payment Options Container */}
-    <div className="flex flex-col items-start gap-8 bg-white text-xl text-gray-200 w-full rounded-3xs border border-gray-400">
-      {/* Payment Options Header */}
-      <div className="flex flex-row py-2 px-4 items-center justify-start w-full">
-        <div className="font-medium">All Payment Options</div>
-      </div>
-
-      {/* Payment Cards */}
-      <div className="flex flex-col items-start gap-8 w-full">
-        <PaymentCard
+        {/* Payment Cards */}
+        <div className="flex flex-col gap-2 w-full rounded-xl">
+          <PaymentCard
             toggleModal={toggleModal}
-            paymentMethodIcon="/rectangle-104@2x.png"
+            paymentMethodIcon="/upi.png"
             setSelectedPaymentMethod={setSelectedPaymentMethod}
             paymentMethodDescription="UPI Payment"
             paymentOptions="Pay instantly with UPI Apps"
+            className=""
           />
           <PaymentCard
             toggleModal={toggleModal}
-            paymentMethodIcon="/rectangle-1041@2x.png"
+            paymentMethodIcon="/credit_debit_card.png"
             setSelectedPaymentMethod={setSelectedPaymentMethod}
             paymentMethodDescription="Credit / Debit Card"
             paymentOptions="Visa, Mastercard, amex, Rupay and more"
             propDisplay="inline-block"
-            propWidth="153px"
           />
           <PaymentCard
             toggleModal={toggleModal}
-            paymentMethodIcon="/rectangle-1042@2x.png"
+            paymentMethodIcon="/paylater.png"
             setSelectedPaymentMethod={setSelectedPaymentMethod}
             paymentMethodDescription="Paylater"
-            paymentOptions="LazyPay, Simpl, ZestMoney, ICICI PayLater, HDFC Flexipay and more"
+            paymentOptions="LazyPay, Simpl, ZestMoney and more"
             propDisplay="inline-block"
-            propWidth="unset"
           />
           <PaymentCard
             toggleModal={toggleModal}
-            paymentMethodIcon="/rectangle-1043@2x.png"
+            paymentMethodIcon="/net_banking.png"
             setSelectedPaymentMethod={setSelectedPaymentMethod}
             paymentMethodDescription="Net Banking"
             paymentOptions="We Support all major banks"
             propDisplay="inline-block"
-            propWidth="unset"
           />
           <PaymentCard
             toggleModal={toggleModal}
-            paymentMethodIcon="/rectangle-1044@2x.png"
+            paymentMethodIcon="/mobile_wallets.png"
             setSelectedPaymentMethod={setSelectedPaymentMethod}
             paymentMethodDescription="Mobile Wallets"
             paymentOptions="Amazonpay, Mobikwik, Payzapp, PayPal"
             propDisplay="inline-block"
-            propWidth="unset"
+            isLastCard={true}
           />
-      </div>
-    </div>
-
-    {/* Cancel Button */}
-    <div className="rounded flex flex-row py-4 px-0 items-center justify-center text-base border border-tomato rounded-3xs text-tomato w-full">
-      <div className="font-semibold">Cancel</div>
-    </div>
-
-    {/* Stripe Form (Conditional Rendering) */}
-    {selectedPaymentMethod === "Credit / Debit Card" && isModalOpen && (
-      <div className="fixed inset-0 flex flex-col items-center justify-center z-50">
-        <span className="text-sm text-tomato bg-white">
-            use 424242424242424242 as the card number <br/>
-            and any future month/year as the expiration <br/>
-            random number for cvv/zip <br/>
-          </span>
-        <div className="bg-white p-4 m-4 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/3">
-          {/* Close Button */}
-          <span
-            className="relative top-0 inset-x-3/4 text-base cursor-pointer"
-            onClick={toggleModal}
-          >
-            &times; Close
-          </span>
-
-          {/* Stripe Form */}
-          <form className="space-y-4">
-            <div className="flex flex-col">
-              <label className="text-lg font-medium p-2">Card Details</label>
-              <CardElement
-                options={{
-                  style: {
-                    base: {
-                      fontSize: "20px",
-                      color: "#4A5568",
-                    },
-                  },
-                }}
-                className="p-4 border rounded"
-              />
-            </div>
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="bg-blue-500 text-white p-2 rounded"
-              disabled={!stripe}
-            >
-              Pay
-            </button>
-            {paymentStatus && (
-              <div className="text-center text-lg">{paymentStatus}</div>
-            )}
-          </form>
         </div>
       </div>
-    )}
-  </div>
-);
+
+      {/* Cancel Button */}
+      <button className="rounded-lg flex py-4 justify-center hover:bg-tomato hover:text-white border border-tomato text-tomato w-full ">
+        Cancel
+      </button>
+
+      {/* Stripe Form (Conditional Rendering) */}
+      {selectedPaymentMethod === "Credit / Debit Card" && isModalOpen && (
+        <div className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-black bg-opacity-70">
+          <span className="text-sm text-tomato uppercase bg-white px-6 py-4 rounded-xl">
+            use 424242424242424242 as the card number <br />
+            and any future month/year as the expiration <br />
+            random number for cvv/zip <br />
+          </span>
+          <div className="relative flex flex-col bg-white p-4 m-4 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/3">
+            {/* Close Button */}
+            <button
+              className="flex justify-end hover:text-tomato"
+              onClick={toggleModal}
+            >
+              &times; Close
+            </button>
+
+            {/* Stripe Form */}
+            <form className=" flex flex-col space-y-4">
+              <div className="flex flex-col">
+                <label className="text-lg font-medium p-2">Card Details</label>
+                <CardElement
+                  options={{
+                    style: {
+                      base: {
+                        fontSize: "20px",
+                        color: "#4A5568",
+                      },
+                    },
+                  }}
+                  className="p-4 border rounded"
+                />
+              </div>
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="bg-blue-500 text-white p-2 rounded"
+                disabled={!stripe}
+              >
+                Pay
+              </button>
+              {paymentStatus && (
+                <div className="text-center text-lg">{paymentStatus}</div>
+              )}
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default PaymentModeForm;

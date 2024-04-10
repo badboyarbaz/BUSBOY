@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authenticateUser } from "../redux/authAction";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -32,18 +32,23 @@ const RegistrationForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
+      const apiUrl =
+        process.env.NODE_ENV === "production"
+          ? process.env.REACT_APP_API_URL_PROD
+          : process.env.REACT_APP_API_URL_DEV;
       try {
         const response = await axios.post(
           `${apiUrl}/api/auth/register`,
-          values
+          values,
         );
         console.log(response);
         // Authenticate the user
-        const actionResult = await dispatch(authenticateUser({
-          email: values.email,
-          password: values.password,
-        }));
+        const actionResult = await dispatch(
+          authenticateUser({
+            email: values.email,
+            password: values.password,
+          }),
+        );
         if (actionResult && actionResult.token) {
           const from = location.state?.from || "/";
           navigate(from);
@@ -60,8 +65,8 @@ const RegistrationForm = () => {
   return (
     <div className="bg-whitesmoke flex flex-col min-h-screen w-full">
       {/* Header */}
-      < Header />
-  
+      <Header />
+
       {/* Main Content */}
       <main className="flex flex-col items-center justify-center md:mt-6 font-poppins px-2">
         <div className="flex flex-col m-10 w-full md:w-1/2 lg:w-1/3 bg-white p-8 border-gray-400  rounded-md border-2 shadow-md">
@@ -72,12 +77,15 @@ const RegistrationForm = () => {
               <span className="text-gray-200">BOY</span>
             </a>
           </h1>
-  
+
           {/* Form */}
           <form onSubmit={formik.handleSubmit} className="mt-4">
             {/* Full Name */}
             <div className="mb-4">
-              <label htmlFor="name" className="block text-sm font-medium text-dimgray">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-dimgray"
+              >
                 Full Name
               </label>
               <input
@@ -87,15 +95,16 @@ const RegistrationForm = () => {
                 className="mt-1 p-2 w-full border rounded-md"
               />
               {formik.touched.name && formik.errors.name ? (
-                <div className="text-red-600 text-sm">
-                  {formik.errors.name}
-                </div>
+                <div className="text-red-600 text-sm">{formik.errors.name}</div>
               ) : null}
             </div>
-  
+
             {/* Email */}
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-dimgray">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-dimgray"
+              >
                 Email
               </label>
               <input
@@ -110,10 +119,13 @@ const RegistrationForm = () => {
                 </div>
               ) : null}
             </div>
-  
+
             {/* Password */}
             <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-dimgray">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-dimgray"
+              >
                 Password
               </label>
               <input
@@ -128,10 +140,13 @@ const RegistrationForm = () => {
                 </div>
               ) : null}
             </div>
-  
+
             {/* Confirm Password */}
             <div className="mb-4">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-dimgray">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-dimgray"
+              >
                 Confirm Password
               </label>
               <input
@@ -140,16 +155,17 @@ const RegistrationForm = () => {
                 {...formik.getFieldProps("confirmPassword")}
                 className="mt-1 p-2 w-full border rounded-md"
               />
-              {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+              {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword ? (
                 <div className="text-red-600 text-sm">
                   {formik.errors.confirmPassword}
                 </div>
               ) : null}
             </div>
-  
+
             {/* Error Message */}
             {error && <div className="text-red-600 text-sm">{error}</div>}
-  
+
             {/* Register Button */}
             <button
               type="submit"
@@ -161,10 +177,10 @@ const RegistrationForm = () => {
         </div>
       </main>
 
-        {/* Footer */}
-        < Footer />
+      {/* Footer */}
+      <Footer />
     </div>
-  )};
-  
+  );
+};
 
 export default RegistrationForm;

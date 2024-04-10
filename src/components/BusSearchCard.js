@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import Autosuggest from "react-autosuggest";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCities } from "../redux/cityActions";
 import React, { useEffect, useState } from "react";
@@ -35,13 +34,13 @@ const BusSearchCard = () => {
     navigate("/bus-list");
   }, [navigate, dispatch]);
 
-  //Auto Suggest for departure and destination
+  //Auto Suggest styling
   const theme = {
     container:
-      "relative flex flex-col py-4 px-6 items-center justify-center border-b border-solid border-gray-400",
-    input: "outline-none",
+      "relative flex flex-col py-4 px-6 items-center justify-center border-b border-solid border-gray-400 text-center",
+    input: "outline-none text-center lg:text-start",
     suggestionsContainerOpen:
-      "absolute top-16 flex flex-col w-full font-normal text-sm text-white bg-gray-500 z-50 border border-gray-300 rounded-lg shadow-lg",
+      "absolute top-16 flex flex-col w-full font-normal text-sm text-white bg-gray-500 z-50 border border-gray-300 rounded-lg shadow-lg m-auto lg:ml-10",
     suggestionsList: "list-none flex flex-col",
     suggestion: "p-2 cursor-pointer",
     suggestionHighlighted: "bg-royalblue-100 rounded-lg",
@@ -57,7 +56,7 @@ const BusSearchCard = () => {
         onChange={(date) => setStartDate(date)}
         customInput={<CustomInput />}
         dateFormat="dd/MMM/yyyy"
-        className=""
+        className="text-center"
       />
     );
   };
@@ -78,7 +77,7 @@ const BusSearchCard = () => {
   ));
 
   return (
-    <div className="relative w-full px-6 grid grid-cols-2 grid-rows-3 gap-8 mt-6">
+    <div className="w-full flex flex-col lg:ml-10 lg:grid grid-cols-2 grid-rows-3 gap-8 mt-6">
       <CustomAutosuggest
         suggestionsData={cities.map((city) => city.name)}
         placeholder={"Departure"}

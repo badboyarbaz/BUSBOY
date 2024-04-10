@@ -1,12 +1,15 @@
 import axios from "axios";
 
 export const authenticateUser = (values) => async (dispatch) => {
-  const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
+  const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.REACT_APP_API_URL_PROD
+      : process.env.REACT_APP_API_URL_DEV;
   try {
     console.log("About to send request", values);
     const response = await axios.post(`${apiUrl}/api/auth/login`, values, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     if (response && response.data) {

@@ -9,9 +9,7 @@ const QRCodeViewerContainer = () => {
       />
 
       {/* Scan the code text */}
-      <div className="font-medium">
-        Scan the code to view in any device
-      </div>
+      <div className="font-medium">Scan the code to view in any device</div>
 
       {/* Print Ticket (English) Button */}
       <button
@@ -48,9 +46,7 @@ const QRCodeViewerContainer = () => {
         className="cursor-pointer py-4 px-6 bg-royalblue-100 w-full rounded-3xs"
         autoFocus
       >
-        <div className="text-base font-medium text-white">
-          Download Ticket
-        </div>
+        <div className="text-base font-medium text-white">Download Ticket</div>
       </button>
     </div>
   );

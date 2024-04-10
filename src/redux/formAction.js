@@ -1,4 +1,4 @@
-import { SUBMIT_PASSENGER_DETAILS } from './constants';
+import { SUBMIT_PASSENGER_DETAILS } from "./constants";
 
 export const submitPassengerDetails = (values) => {
   return {
