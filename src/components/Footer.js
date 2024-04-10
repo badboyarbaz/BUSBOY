@@ -1,94 +1,91 @@
-
-
+import React from "react";
+import {
+  SlSocialFacebook,
+  SlSocialInstagram,
+  SlSocialTwitter,
+} from "react-icons/sl";
+import { BsSend } from "react-icons/bs";
 const Footer = () => {
-
   return (
-    <footer
-      className="relative bg-royalblue-100 w-full h-[287px] flex flex-col md:p-4 box-border items-start justify-start text-left text-5xl text-white font-poppins lg:flex lg:flex-col lg:items-center lg:justify-center"
-    >
-    <div className="sm:block md:block lg:hidden">
-      {/* Logo */}
-      <div>
-        <a className="relative top-3 inset-x-32 gap-y-10 md:top-0 md:left-0  font-semibold text-[inherit] md:text-center lg:text-left">
-          <span>BUS</span>
-          <span className="text-gray-200">BOY</span>
-        </a>
-      </div>
-
-      {/* Links */}
-      <div className="relative flex px-4 pt-3">
-        <div className="relative top-5 flex flex-col lg:flex-row inset-x-10 justify-center items-center gap-3 text-base">
-          <a className="relative font-medium text-[inherit]">About us</a>
-          <a className="relative font-medium text-[inherit]">Mobile</a>
-          <a className="relative font-medium text-[inherit]">Privacy</a>
+    <footer className="relative bg-royalblue-100 w-full h-auto flex flex-col md:p-4 items-start justify-start text-white lg:flex lg:flex-col lg:items-center lg:justify-center">
+      <div className="sm:block md:block lg:hidden">
+        {/* Logo Mobile*/}
+        <div className="flex flex-col items-center py-2">
+          <a className="font-semibold">
+            <span className="text-2xl">BUS</span>
+            <span className="text-2xl text-gray-200">BOY</span>
+          </a>
         </div>
-        <div className="relative top-5 flex flex-col lg:flex-row inset-x-20  justify-center items-center gap-3 text-base">
-          <a className="relative font-medium text-[inherit]">Terms of use</a>
-          <a className="relative font-medium text-[inherit]">Career</a>
-          <a className="relative font-medium text-[inherit]">Customer Service</a>
+
+        {/* Links */}
+        <div className="flex px-4 py-6">
+          <div className="grid grid-cols-3 text-center items-center gap-4">
+            <a className="relative ">About us</a>
+            <a className="relative ">Mobile</a>
+            <a className="relative ">Privacy</a>
+            <a className="relative ">Terms of use</a>
+            <a className="relative ">Career</a>
+            <a className="relative ">Customer Service</a>
+          </div>
+        </div>
+
+        {/* Social Links */}
+        <div className="relative top-20 px-12 space-x-20 w-1/2 flex flex-row items-center justify-between z-[0]">
+          <img className="" alt="" src="/vector.svg" />
+          <img className="" alt="" src="/vector1.svg" />
+          <img className="" alt="" src="/vector2.svg" />
         </div>
       </div>
-
-
-      {/* Social Links */}
-      <div className="relative top-20 px-12 space-x-20 w-1/2 flex flex-row items-center justify-between z-[0]">
-        <img
-            className=""
-            alt=""
-            src="/vector.svg"
-        />
-        <img className="" alt="" src="/vector1.svg" />
-        <img
-            className=""
-            alt=""
-            src="/vector2.svg"
-        />
-      </div>
-    </div>
 
       {/* New Grid layout for lg and bigger devices */}
-      <div className="hidden lg:grid lg:grid-rows-2  lg:grid-cols-2 lg:gap-y-10 lg:gap-x-72 inset-0">
+      <div className="hidden lg:grid lg:grid-rows-2 lg:grid-cols-2 gap-x-96 gap-y-8">
         {/* 1st row, 1st col: Logo */}
         <div className="flex items-center justify-start">
           <a className="font-semibold">
-            <span>BUS</span>
-            <span className="text-gray-200">BOY</span>
+            <span className="text-3xl">BUS</span>
+            <span className="text-3xl text-gray-200">BOY</span>
           </a>
         </div>
+
         {/* 1st row, 2nd col: Social Links */}
         <div className="flex items-center justify-end">
-          <div className="flex items-center justify-between w-1/2">
-            <img className="w-[27.5px] h-[32.5px]" alt="" src="/vector.svg" />
-            <img className="w-[30px] h-[30px]" alt="" src="/vector1.svg" />
-            <img className="w-[32.5px] h-[32.5px]" alt="" src="/vector2.svg" />
+          <div className="flex items-center gap-10">
+            <SlSocialFacebook className="w-6 h-6" />
+            <SlSocialInstagram className="w-6 h-6" />
+            <SlSocialTwitter className="w-6 h-6" />
           </div>
         </div>
+
         {/* 2nd row, 1st col: Newsletter */}
         <div className="flex items-center justify-start ">
           <div>
-            <div className="font-semibold">Planning your next trip?</div>
-            <div className="text-sm font-medium">Subscribe to our newsletter. Get the latest travel trends & deals!</div>
+            <p className="font-normal text-lg">Planning your next trip?</p>
+            <p className="text-sm">
+              Subscribe to our newsletter. Get the latest travel trends & deals!
+            </p>
           </div>
         </div>
+
         {/* 2nd row, 2nd col: Input box and img */}
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center gap-4">
           <input
-              className="border-none font-medium font-poppins text-sm text-center bg-whitesmoke text-black rounded-3xl w-full h-14"
-              type="email"
-              placeholder="Enter Email ID"
-              required
+            className="w-full p-2 text-xs font-normal text-black text-left rounded-full outline-none bg-whitesmoke"
+            type="email"
+            placeholder="Enter Email ID"
+            required
           />
-          <img className="px-2" alt="" src="/vector4.svg" />
+          <BsSend className="w-6 h-6" />
         </div>
       </div>
+
       {/* Bottom row: Links */}
-      <div className="relative lg:block hidden flex-row justify-between space-x-10 pt-10 text-base">
-        <a className="font-medium gap-2">About us</a>
-        <a className="font-medium gap-2">Mobile</a>
-        <a className="font-medium">Privacy</a>
-        <a className="font-medium">Terms of use</a>
-        <a className="font-medium">Career</a>
-        <a className="font-medium">Customer Service</a>
+      <div className="relative flex-row justify-between hidden pt-10 space-x-10 text-sm lg:block">
+        <a className="cursor-pointer">About us</a>
+        <a className="cursor-pointer">Mobile</a>
+        <a className="cursor-pointer">Privacy</a>
+        <a className="cursor-pointer">Terms of use</a>
+        <a className="cursor-pointer">Career</a>
+        <a className="cursor-pointer">Customer Service</a>
       </div>
     </footer>
   );

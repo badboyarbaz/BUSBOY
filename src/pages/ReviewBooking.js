@@ -17,23 +17,28 @@ const ReviewBooking = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const userIsAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const userIsAuthenticated = useSelector(
+    (state) => state.auth.isAuthenticated,
+  );
 
   // Retrieve saved form data from Redux state
   const savedFormData = useSelector((state) => state.form.passengerDetails);
 
-  const [formData, setFormData] = useState(savedFormData ? savedFormData : {
-    passengers: [
-      {
-        name: "",
-        gender: "",
-        age: "",
-      },
-    ],
-    mobile: "",
-    email: "",
-  });
-
+  const [formData, setFormData] = useState(
+    savedFormData
+      ? savedFormData
+      : {
+          passengers: [
+            {
+              name: "",
+              gender: "",
+              age: "",
+            },
+          ],
+          mobile: "",
+          email: "",
+        },
+  );
 
   // Populate form fields with saved data
   useEffect(() => {
@@ -47,77 +52,69 @@ const ReviewBooking = () => {
   const onBookNowClick = useCallback(() => {
     console.log("onBookNowClick triggered");
     // Trigger Formik's submitForm method
-    if (formikRef.current) { 
+    if (formikRef.current) {
       console.log("Formik ref exists", formikRef.current);
 
-      formikRef.current.submitForm().then(() => {
-        // Check if the form is valid and submitted successfully
-        if (formikRef.current && formikRef.current.isValid) {
-          console.log("Dispatching action with formik values:", formikRef.current.values);
-          dispatch(submitPassengerDetails(formikRef.current.values));
-          
-          if (userIsAuthenticated) {
-            navigate("/payment-portal");
+      formikRef.current
+        .submitForm()
+        .then(() => {
+          // Check if the form is valid and submitted successfully
+          if (formikRef.current && formikRef.current.isValid) {
+            console.log(
+              "Dispatching action with formik values:",
+              formikRef.current.values,
+            );
+            dispatch(submitPassengerDetails(formikRef.current.values));
+
+            if (userIsAuthenticated) {
+              navigate("/payment-portal");
+            } else {
+              navigate("/authentication/login", {
+                state: { from: location.pathname },
+              });
+            }
           } else {
-            navigate("/authentication/login", { state: { from: location.pathname } });
+            console.log("Formik ref is null");
           }
-        }else{
-          console.log("Formik ref is null");
-        }
-      }).catch((error) => {
-        console.log("Formik submitForm error:", error);
-      });
+        })
+        .catch((error) => {
+          console.log("Formik submitForm error:", error);
+        });
     }
   }, [navigate, userIsAuthenticated, location, dispatch, formData]);
 
   return (
-    <div className="relative bg-whitesmoke w-full h-screen overflow-auto space-y-10 text-left text-xl text-gray-200 font-poppins">
-       <Header />
-      <main className="pt-2 px-4 md:px-10 flex flex-col md:flex-row items-start justify-between gap-8">
-        <div className="w-full md:w-1/2 flex flex-col items-start justify-start gap-8 text-left text-xl text-gray-200 font-poppins">
-          <div className="relative top-0 left-0 md:-mt-8 text-13xl font-semibold text-royalblue-100 z-[4]">
-            Review your booking
-          </div>
-          <div className="w-full md:w-1/2 flex flex-col items-start justify-start gap-8">
-            <SectionSeatSelectionCard />
-          </div>
-          <div className="flex w-full rounded-3xs bg-white flex flex-col p-8 items-start justify-start gap-8 border border-gray-400">
-            <div className="w-full flex flex-row py-2.5 px-0 box-border items-center justify-start">
-              <div className="flex flex-row items-center justify-start gap-[30px]">
-                <div className="relative font-medium">{`Pickup & Drop`}</div>
-                <div className="relative text-xs font-medium text-gray-400">{`Please select your pickup point and drop point  `}</div>
-              </div>
-            </div>
-            <PickupAndDropCard />
-          </div>
-          < TermsAndCancellation/>
+    <div className="relative bg-whitesmoke w-full h-auto">
+      <Header />
+      <div className="flex flex-col text-xl font-semibold text-gray-200 font-poppins py-4 px-12">
+        Review your booking
+      </div>
+      <main className="pt-2 px-4 lg:px-10 flex flex-col xl:flex-row items-start justify-between gap-8">
+        <div className="w-full lg:w-full flex flex-col items-start justify-start gap-8">
+          <SectionSeatSelectionCard />
+          <PickupAndDropCard />
+          <TermsAndCancellation />
         </div>
 
-
-        <div className="w-full md:w-1/2 flex flex-col items-end justify-end gap-8 md:mt-12 text-left text-xl text-gray-200 font-poppins">
-          <PassengerDetailsForm selectedSeats={selectedSeats} formikRef={formikRef} formData={formData} setFormData={setFormData} />
+        <div className="w-full md:w-1/3 space-y-4">
+          <PassengerDetailsForm
+            selectedSeats={selectedSeats}
+            formikRef={formikRef}
+            formData={formData}
+            setFormData={setFormData}
+          />
           <OfferCard />
           <ApplyCodeForm />
-          <BillDetailsContainer/>
-          <div className="flex flex-col w-full py-2 px-0 items-center justify-center gap-5 text-xs text-gray-100">
-            <div className="relative font-medium">
-              Discounts, offers and price concessions will be applied later
-              during payment
-            </div>
-            <button
-              className="cursor-pointer py-4 px-0 bg-royalblue-100 rounded-3xs w-full flex flex-row box-border items-center justify-between"
-              onClick={onBookNowClick}
-            >
-              <div className="self-stretch flex-1 relative text-base font-semibold font-poppins text-white text-center">
-                Book Now
-              </div>
+          <BillDetailsContainer />
+          <div className="flex flex-row w-full items-center justify-between gap-2 pb-4">
+            <button className="px-4 py-2 rounded-xl border-tomato border w-1/2 h-auto text-tomato hover:bg-tomato hover:text-white">
+              CANCEL
             </button>
             <button
-              className="cursor-pointer py-4 px-0 bg-[transparent] rounded-3xs w-full flex flex-row  border-solid border border-tomato items-center justify-between"
+              className="px-4 py-2 bg-royalblue-100 rounded-xl w-1/2 h-auto text-white"
+              onClick={onBookNowClick}
             >
-              <div className="self-stretch flex-1 relative text-base font-semibold font-poppins text-tomato text-center">
-                Cancel
-              </div>
+              Book Now
             </button>
           </div>
         </div>

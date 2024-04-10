@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import Autosuggest from "react-autosuggest";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCities } from "../redux/cityActions";
 import React, { useEffect, useState } from "react";
 
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import CustomAutosuggest from "./CustomAutosuggest";
 
 const BusSearchCard = () => {
   const dispatch = useDispatch();
@@ -20,115 +20,88 @@ const BusSearchCard = () => {
     dispatch(fetchCities());
   }, [dispatch]);
 
-  const getSuggestions = (value) => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-    return inputLength === 0
-      ? []
-      : cities.filter(
-          (city) => city.name.toLowerCase().slice(0, inputLength) === inputValue
-        );
+  const handleDepartureSuggestion = (event, { suggestion }) => {
+    setDepartureCity(suggestion);
   };
 
-  const getSuggestionValue = (suggestion) => suggestion.name;
-
-  const renderSuggestion = (suggestion) => <div>{suggestion.name}</div>;
-
-  const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(getSuggestions(value));
-  };
-
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
+  const handleDestinationSuggestion = (event, { suggestion }) => {
+    setDestinationCity(suggestion);
   };
 
   const navigate = useNavigate();
 
   const onSearchButtonClick = useCallback(() => {
     navigate("/bus-list");
-  }, [navigate]);
+  }, [navigate, dispatch]);
 
-  //Auto Suggest for departure and destination
-  const autosuggestTheme = {
+  //Auto Suggest styling
+  const theme = {
     container:
-      "relative font-medium font-poppins text-md bg-[transparent] shadow-[0px_3px_4px_rgba(0,_0,_0,_0.25)] w-[335px] flex flex-col py-4 px-[25px] items-center justify-center border-b-[1px] border-solid border-gray-400",
-    input: "focus:outline-none focus:border-royalblue-100 border-none w-full",
+      "relative flex flex-col py-4 px-6 items-center justify-center border-b border-solid border-gray-400 text-center",
+    input: "outline-none text-center lg:text-start",
     suggestionsContainerOpen:
-      "absolute top-[100%] flex flex-col justify-start m-2 font-light font-poppins text-md bg-grey-100 z-50 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg",
-    suggestionsList: "m-0 p-0 list-none flex flex-col",
-    suggestion: "p-2 cursor-pointer hover:bg-grey-100",
-    suggestionHighlighted: "bg-royalblue-100",
+      "absolute top-16 flex flex-col w-full font-normal text-sm text-white bg-gray-500 z-50 border border-gray-300 rounded-lg shadow-lg m-auto lg:ml-10",
+    suggestionsList: "list-none flex flex-col",
+    suggestion: "p-2 cursor-pointer",
+    suggestionHighlighted: "bg-royalblue-100 rounded-lg",
   };
 
+  // custom date picker as per theme
+  const CustomDatePicker = () => {
+    const [startDate, setStartDate] = useState(new Date());
 
-// custom date picker as per theme
-const CustomDatePicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
+    return (
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        customInput={<CustomInput />}
+        dateFormat="dd/MMM/yyyy"
+        className="text-center"
+      />
+    );
+  };
 
-  return (
-    <DatePicker
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
-      customInput={<CustomInput />}
-      dateFormat="dd/MMM/yyyy"
-    />
-  );
-};
-
-const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
-  <div className="font-light font-poppins text-md bg-[transparent] shadow-[0px_3px_4px_rgba(0,_0,_0,_0.25)] w-[335px] flex flex-row gap-5 py-4 px-[25px] items-center justify-start border-b-[1px] border-solid border-gray-400" onClick={onClick} ref={ref}>
-    <div>{value}</div>
-    <img className="relative pl-7 ml-14" src="../calendericon.svg" alt="calendar icon" />
-  </div>
-));
-
-
-  return (
-    <div className="relative w-full xl:grid xl:grid-cols-2 xl:grid-rows-3 xl:gap-4 md:w-[660px] h-[auto] pt-10 md:pl-5 flex flex-col md:flex-row items-start justify-start md:mt-5 mb-10 mx-auto md:mx-0">
-      <div className="relative w-[350px] mx-auto md:mx-0 md:w-[335px] md:top-[0px] md:left-[0px] mb-4 xl:col-span-1 xl:row-span-1">
-        <Autosuggest
-          suggestions={suggestions}
-          theme={autosuggestTheme}
-          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={{
-            placeholder: "Aurangabad, Maharashtra",
-            value: departureCity,
-            onChange: (event, { newValue }) => setDepartureCity(newValue),
-          }}
-        />
-      </div>
-
-      <div className="relative w-[350px] mx-auto md:mx-0 md:w-[335px] md:top-[0px] md:left-[50px] mb-4 xl:col-span-1 xl:row-span-1">
-        <Autosuggest
-          suggestions={suggestions}
-          theme={autosuggestTheme}
-          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={{
-            placeholder: "Bangalore, Karnataka",
-            value: destinationCity,
-            onChange: (event, { newValue }) => setDestinationCity(newValue),
-          }}
-        />
-      </div>
-      <div className="relative w-[350px] mx-auto md:mx-0 mb-4 xl:col-span-2 xl:row-span-1">
-      <CustomDatePicker />
+  const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    <div
+      className="flex flex-row gap-44 py-4 px-6 items-center justify-start text-center border-b border-solid border-gray-400"
+      onClick={onClick}
+      ref={ref}
+    >
+      <div>{value}</div>
+      <img
+        className="relative flex item-center justify-end"
+        src="../calendericon.svg"
+        alt="calendar icon"
+      />
     </div>
-    <button
-  className="cursor-pointer py-4 px-[25px] bg-royalblue-100 w-[350px] mx-auto md:mx-0 rounded-3xs md:w-[724px] overflow-hidden flex items-center justify-center xl:col-span-2 xl:row-span-1"
-  autoFocus
-  id="search"
-  onClick={onSearchButtonClick}
->
-  <div className="text-sm font-medium font-poppins text-white text-center">
-    Search for buses
-  </div>
-</button>
+  ));
+
+  return (
+    <div className="w-full flex flex-col lg:ml-10 lg:grid grid-cols-2 grid-rows-3 gap-8 mt-6">
+      <CustomAutosuggest
+        suggestionsData={cities.map((city) => city.name)}
+        placeholder={"Departure"}
+        onSuggestionSelected={handleDepartureSuggestion}
+        theme={theme}
+      />
+
+      <CustomAutosuggest
+        suggestionsData={cities.map((city) => city.name)}
+        placeholder={"Destination"}
+        onSuggestionSelected={handleDestinationSuggestion}
+        theme={theme}
+      />
+
+      <div className="relative w-full">
+        <CustomDatePicker />
+      </div>
+      <button
+        className="cursor-pointer py-4 px-6 text-white bg-royalblue-100 w-full mx-auto md:mx-0 rounded-xl flex items-center justify-center outline-none"
+        id="search"
+        onClick={onSearchButtonClick}
+      >
+        Search for buses
+      </button>
     </div>
   );
 };

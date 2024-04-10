@@ -1,5 +1,4 @@
-
-import { SET_TICKET_DETAILS, CLEAR_TICKET_DETAILS } from './ticketAction';
+import { SET_TICKET_DETAILS, CLEAR_TICKET_DETAILS } from "./ticketAction";
 
 const initialState = {
   ticketDetails: null,
@@ -11,9 +10,9 @@ const ticketReducer = (state = initialState, action) => {
       return {
         ...state,
         ticketDetails: {
-            ...state.ticketDetails,
-            ...action.payload,
-          },
+          ...state.ticketDetails,
+          ...action.payload,
+        },
       };
     case CLEAR_TICKET_DETAILS:
       return {

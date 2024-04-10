@@ -1,5 +1,3 @@
-//import "bootstrap/dist/css/bootstrap.min.css";
-//import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
@@ -17,7 +15,7 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
           name: Yup.string().required("Name is required"),
           gender: Yup.string().required("Gender is required"),
           age: Yup.string().required("Age is required"),
-        })
+        }),
       )
       .required("Must have passengers"),
     mobile: Yup.string()
@@ -29,16 +27,24 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
   });
 
   // State to manage dropdown visibility
-
   const [openGenderDropdowns, setOpenGenderDropdowns] = useState({});
   const [openAgeDropdowns, setOpenAgeDropdowns] = useState({});
 
   // Function to handle dropdown item selection
   const toggleDropdown = (type, index) => {
     if (type === "gender") {
-      setOpenGenderDropdowns({ ...openGenderDropdowns, [index]: !openGenderDropdowns[index] });
+      setOpenAgeDropdowns({});
+      setOpenGenderDropdowns((prevState) => ({
+        ...prevState,
+        [index]: !prevState[index],
+      }));
     } else {
-      setOpenAgeDropdowns({ ...openAgeDropdowns, [index]: !openAgeDropdowns[index] });
+      setOpenGenderDropdowns({});
+      setOpenAgeDropdowns((prevState) => ({
+        ...prevState,
+        [index]: !prevState[index],
+      }));
+      console.log("Age index:", index);
     }
   };
 
@@ -50,6 +56,12 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
   const genderOptions = ["Male", "Female", "Other"];
   const ageOptions = ["0-5", "6-18", "19-45", "45 and above"];
 
+  //Button styles
+  const buttonProps =
+    "w-28 h-12 border-b border-gray-300 hover:border-royalblue-100 ";
+  const optionsProps =
+    "cursor-pointer text-center hover:bg-royalblue-100 border-b p-2";
+
   return (
     <Formik
       innerRef={formikRef}
@@ -60,33 +72,39 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
       }}
     >
       {({ setFieldValue, values }) => (
-        <form className="flex flex-col bg-white w-full p-4 gap-4 rounded-3xs border border-solid border-gray-400">
-          <h1 className="text-xl font-medium">Passenger Details</h1>
+        <form className="flex flex-col bg-white w-full px-4 py-2 gap-4 rounded-xl border border-gray-400">
+          <h1 className="text-sm font-medium">Passenger Details</h1>
           {selectedSeats.map((seat, index) => (
-            <div key={index} className="flex flex-col md:flex-row gap-4">
+            <div key={index} className="flex flex-row gap-4">
+              {/* Passenger Name Field */}
               <Field
-                className="flex-1 p-2 border-b rounded-3xs h-12"
+                className="p-2 border-b border-gray-400 min-w-[36px] h-12 outline-none"
                 name={`passengers[${index}].name`}
                 type="text"
-                placeholder={`Passenger ${index + 1} Name (Seat ID: ${seat.id})`}
+                placeholder={`Passenger ${index + 1} Name (Seat ID: ${
+                  seat.id
+                })`}
               />
-              <div className="relative flex flex-col flex-1">
+
+              {/* Dropdowns for Gender */}
+              <div className="relative flex flex-row min-w-[36px]">
                 <button
-                  className={`flex-1 p-2 border-solid border border-royalblue-100 min-w-10 text-nowrap text-sm h-12 rounded-3xs hover:bg-royalblue-100 ${openGenderDropdowns[index] ? 'bg-royalblue-100' : ''}`}
+                  className={buttonProps}
                   onClick={(e) => {
-                    e.preventDefault(); 
+                    e.preventDefault();
                     toggleDropdown("gender", index);
                   }}
-                
                 >
-                  {values.passengers && values.passengers[index] ? values.passengers[index].gender : "Select Gender"}
+                  {values.passengers && values.passengers[index]
+                    ? values.passengers[index].gender
+                    : "Select Gender"}
                 </button>
                 {openGenderDropdowns[index] && (
-                  <div className="absolute top-full z-10 left-0 w-full text-sm bg-white border border-royalblue-100">
+                  <div className="absolute z-10 top-full left-0 w-full min-w-10 text-sm bg-white">
                     {genderOptions.map((gender, genderIndex) => (
                       <div
                         key={genderIndex}
-                        className="cursor-pointer hover:bg-royalblue-100"
+                        className={optionsProps}
                         onClick={() => {
                           setFieldValue(`passengers[${index}].gender`, gender);
                           toggleDropdown("gender", index);
@@ -98,22 +116,26 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
                   </div>
                 )}
               </div>
-              <div className="relative flex flex-row ">
+
+              {/* Dropdown for Age */}
+              <div className="relative flex flex-row min-w-[36px]">
                 <button
-                  className={`flex-1 p-2 border-solid border border-royalblue-100 min-w-10 h-12 text-sm rounded-3xs  hover:bg-royalblue-100 ${openAgeDropdowns[index] ? 'bg-royalblue-100' : ''}`}
+                  className={buttonProps}
                   onClick={(e) => {
-                    e.preventDefault(); 
+                    e.preventDefault();
                     toggleDropdown("age", index);
                   }}
                 >
-                  {values.passengers && values.passengers[index] ? values.passengers[index].age : "Select Age"}
+                  {values.passengers && values.passengers[index]
+                    ? values.passengers[index].age
+                    : "Select Age"}
                 </button>
                 {openAgeDropdowns[index] && (
-                  <div className="absolute z-10 top-full left-0 w-full min-w-10 text-sm bg-white border border-royalblue-100">
+                  <div className="absolute z-10 top-full left-0 w-full min-w-10 text-sm bg-white">
                     {ageOptions.map((age, ageIndex) => (
                       <div
                         key={ageIndex}
-                        className="cursor-pointer hover:bg-royalblue-100"
+                        className={optionsProps}
                         onClick={() => {
                           setFieldValue(`passengers[${index}].age`, age);
                           toggleDropdown("age", index);
@@ -127,33 +149,34 @@ const PassengerDetailsForm = ({ formikRef, formData, setFormData }) => {
               </div>
             </div>
           ))}
+
           {/* Rest of your form */}
-          <div className="rounded-3xs bg-white box-border w-full flex flex-col p-4 items-center justify-start border border-solid border-gray-400 mt-9">
-                <div className="self-stretch flex flex-row py-2 px-4 items-start justify-start relative gap-20">
-                  <h1 className="relative text-[inherit] font-medium font-inherit">
-                    Contact Details
-                  </h1>
-                  <h3 className="relative text-sm font-medium font-inherit text-gray-400">
-                    Your ticket info will be sent here
-                  </h3>
-                </div>
-                <div className="self-stretch flex flex-col md:flex-row text-center px-4 py-2 items-start justify-start gap-5">
-                  <Field
-                    className="h-10 font-medium font-poppins text-base bg-[transparent] flex-1 flex items-start justify-start"
-                    name="mobile"
-                    type="text"
-                    placeholder="Mobile Number"
-                    required
-                  />
-                  <Field
-                    className="h-10 font-medium font-poppins text-base bg-[transparent] flex-1 flex items-start justify-start"
-                    name="email"
-                    type="email"
-                    placeholder="Email ID"
-                    required
-                  />
-                </div>
-              </div>
+          <div className="w-full flex flex-col border-t-2 border-solid border-gray-400 gap-2 pt-4">
+            <div className="flex flex-row items-start justify-between py-2">
+              <p className="text-start text-sm font-semibold">
+                Contact Details
+              </p>
+              <p className="relative text-sm font-medium font-inherit text-gray-400">
+                Your ticket info will be sent here
+              </p>
+            </div>
+            <div className="flex flex-col lg:flex-row text-center px-4 py-2 items-start justify-start gap-5">
+              <Field
+                className="h-10 w-full font-medium bg-[transparent] outline-none border-b border-gray-400"
+                name="mobile"
+                type="text"
+                placeholder="Mobile Number"
+                required
+              />
+              <Field
+                className="h-10 w-full font-medium bg-[transparent] outline-none border-b border-gray-400"
+                name="email"
+                type="email"
+                placeholder="Email ID"
+                required
+              />
+            </div>
+          </div>
         </form>
       )}
     </Formik>

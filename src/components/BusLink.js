@@ -1,91 +1,118 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  IoIosWifi,
+  IoMdBed,
+  IoMdBus,
+  IoMdLocate,
+  IoMdWater,
+} from "react-icons/io";
+import { MdChargingStation } from "react-icons/md";
 
 const BusLink = ({
-                    departureCity,
-                     destinationCity,
-                   busOperatorName,
-                   sleeperBusType,
-                   busDepartureTime,
-                   busArrivalTime,
-                   availableSeats,
-                   busDepartureDate,
-                   busArrivalDate,
-                   journeyDuration,
-                 }) => {
+  busDeparture,
+  busDestination,
+  busName,
+  busType,
+  busDepartureTime,
+  busArrivalTime,
+  busAvailableSeats,
+  busDepartureDate,
+  busArrivalDate,
+  busJourneyTime,
+}) => {
   const navigate = useNavigate();
   const onSearchButtonClick = useCallback(() => {
     navigate("/review-booking");
   }, [navigate]);
 
   return (
-      <div className="w-full md:w-auto h-auto flex flex-col items-start justify-start py-4">
-        <div className="w-full lg:h-72 rounded bg-white flex flex-col p-4">
-          <div className="text-3xl font-medium">
-            {busOperatorName}
+    <div className="relative flex flex-col w-auto gap-4 px-4 py-6 mr-2 bg-white border-2 rounded-lg">
+      <div className="flex flex-row items-center justify-between">
+        <div className="">
+          <p className="text-xl font-medium">{busName}</p>
+          <p className="text-xs">{busType}</p>
+        </div>
+        <div className="flex flex-col items-start gap-4">
+          <p className="mx-auto text-xs font-medium text-royalblue-100">
+            {busAvailableSeats} Seats available
+          </p>
+          <div className="flex items-center gap-4 p-2 border rounded border-royalblue-100">
+            <IoIosWifi
+              className="w-4 h-4 cursor-pointer"
+              title="Wifi available"
+            />
+            <IoMdBus className="w-4 h-4 cursor-pointer" title="Bus service" />
+            <MdChargingStation
+              className="w-4 h-4 cursor-pointer"
+              title="Charging station available"
+            />
+            <IoMdBed
+              className="w-4 h-4 cursor-auto"
+              title="Sleeping facilities"
+            />
+            <IoMdWater
+              className="w-4 h-4 cursor-auto"
+              title="Water available"
+            />
+            <IoMdLocate
+              className="w-4 h-4 cursor-pointer"
+              title="Location tracking"
+            />
           </div>
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col items-start gap-2">
-              <div className="font-medium">{sleeperBusType}</div>
-              <div className="flex items-center gap-4 border border-royalblue-100 p-2 rounded">
-                  <img
-                      className=" w-4 h-4 object-cover z-[0]"
-                      alt=""
-                      src="/wifi-1@2x.png"
-                  />
-                  <img
-                      className="w-4 h-4 object-cover z-[1]"
-                      alt=""
-                      src="/bus-1@2x.png"
-                  />
-                  <img
-                      className="w-4 h-4 object-cover z-[2]"
-                      alt=""
-                      src="/smartphone-1@2x.png"
-                  />
-                  <img
-                      className="w-4 h-4 object-cover z-[3]"
-                      alt=""
-                      src="/blanket-1@2x.png"
-                  />
-                  <img
-                      className="w-4 h-4 object-cover z-[4]"
-                      alt=""
-                      src="/waterbottle-1@2x.png"
-                  />
-              </div>
-            </div>
-            <div className="text-xs font-medium text-royalblue-100">
-              {availableSeats} Seats available
-            </div>
-          </div>
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-col flex-nowrap items-start">
-              <div className="font-medium">{busDepartureDate} {busDepartureTime}</div>
-              <div className="">{departureCity}</div>
-            </div>
-              <div className=" relative text-3xs text-gray-400 text-center">
-                  {journeyDuration}
-                  <img
-                      className="relative flex inset-x-20 w-2/3 h-2 "
-                      alt=""
-                      src="/vector-1.svg"
-
-                  />
-              </div>
-            <div className="flex flex-col items-end justify-end">
-              <div className="font-medium"> {busArrivalDate} {busArrivalTime}</div>
-              <div>{destinationCity}</div>
-            </div>
-          </div>
-          <button
-              className="w-1/3 md:w-1/3 h-12 flex items-center ml-auto mt-3 justify-center rounded bg-royalblue-100 text-white"
-              onClick={onSearchButtonClick}
-          >
-            Select Seats
-          </button>
         </div>
       </div>
+      <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-col items-start">
+          <p className="font-normal text-xs">
+            {new Date(busDepartureDate).toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </p>
+          <p className="font-normal text-xs">
+            {new Date(busDepartureTime).toLocaleTimeString(undefined, {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
+          <p className="">{busDeparture}</p>
+        </div>
+        <div className="relative text-center text-gray-400 text-xs">
+          {busJourneyTime} Hours
+          <img
+            className="relative hidden lg:block w-2/3 h-2 inset-x-20 "
+            alt=""
+            src="/vector-1.svg"
+          />
+        </div>
+        <div className="flex flex-col items-end justify-end">
+          <p className="font-normal text-xs text-right">
+            {new Date(busArrivalDate).toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </p>
+          <p className="font-normal text-xs">
+            {new Date(busArrivalTime).toLocaleTimeString(undefined, {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
+          <p className="">{busDestination}</p>
+        </div>
+      </div>
+      <div className="flex items-center justify-end">
+        <button
+          className="flex items-center justify-center px-4 py-2 text-white rounded cursor-pointer md:w-1/3 bg-royalblue-100"
+          onClick={onSearchButtonClick}
+        >
+          Select Seats
+        </button>
+      </div>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from './paymentAction';
+import { PAYMENT_SUCCESS, PAYMENT_FAILURE } from "./paymentAction";
 
 const initialState = {
   isPaymentSuccessful: false,

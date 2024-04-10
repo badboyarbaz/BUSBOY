@@ -9,9 +9,8 @@ const BillDetailsContainer = () => {
   const dispatch = useDispatch();
   const selectedSeats = useSelector(getSelectedSeats);
   const billDetails = useSelector((state) => state.bill.billDetails);
-  console.log(billDetails)
+  console.log(billDetails);
   const [prevFareDetails, setPrevFareDetails] = useState(null);
-
 
   useEffect(() => {
     console.log("Selected Seats in useEffect: ", selectedSeats);
@@ -29,30 +28,38 @@ const BillDetailsContainer = () => {
     return <div>Loading...</div>;
   }
 
-
   return (
-      <div className="flex flex-col w-full md:w-full bg-white p-4 gap-4 rounded-3xs border border-s border-gray-400 text-black">
-        <div className="text-xl font-medium">Bill Details</div>
-        <div className="flex flex-col gap-3">
-          <div className="flex flex-row justify-between items-center">
-            <span className="font-medium ">Base Ticket Fare</span>
-            <span className="font-medium ">₹{billDetails.baseFare ? billDetails.baseFare.toFixed(2) : '0.00'}</span>
-          </div>
-          <div className="flex flex-row justify-between">
-            <span className="font-medium">Total Travellers</span>
-            <span className="font-medium">{billDetails.totalSeats}</span>
-          </div>
-          <div className="flex flex-row justify-between">
-            <span className="font-medium">CGST & SGST</span>
-            <span className="font-medium">₹{billDetails.taxAmount ? billDetails.taxAmount.toFixed(2) : "0.00"}</span>
-          </div>
+    <div className="flex flex-col w-full md:w-full bg-white p-4 gap-4 rounded-xl border border-s border-gray-400 text-black">
+      <h1 className="text-xl font-medium">Bill Details</h1>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-row justify-between items-center">
+          <p className="font-medium ">Base Ticket Fare</p>
+          <span className="font-normal ">
+            ₹{billDetails.baseFare ? billDetails.baseFare.toFixed(2) : "0.00"}
+          </span>
         </div>
-        <div className="text-sm font-medium text-gray-500">After Applying discount & Other offers</div>
-        <div className="flex flex-row justify-between text-darkslategray">
-          <span className="font-semibold ">Total Charge</span>
-          <span className="font-semibold">₹{billDetails.totalAmount.toFixed(2)}</span>
+        <div className="flex flex-row justify-between">
+          <p className="font-medium">Total Travellers</p>
+          <span className="font-normal">{billDetails.totalSeats}</span>
+        </div>
+        <div className="flex flex-row justify-between">
+          <p className="font-medium">CGST & SGST</p>
+          <span className="font-normal">
+            ₹{billDetails.taxAmount ? billDetails.taxAmount.toFixed(2) : "0.00"}
+          </span>
         </div>
       </div>
+      <hr className="border-t border-dotted border-royalblue-100 my-4" />
+      <p className="text-xs text-gray-500">
+        After Applying discount & Other offers
+      </p>
+      <div className="flex flex-row justify-between text-darkslategray">
+        <p className="font-semibold ">Total Charge</p>
+        <span className="font-semibold">
+          ₹{billDetails.totalAmount.toFixed(2)}
+        </span>
+      </div>
+    </div>
   );
 };
 

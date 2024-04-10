@@ -1,8 +1,5 @@
-import {
-  useNavigationType,
-  useLocation,
-} from "react-router-dom";
-import { Route, Routes } from 'react-router-dom';
+import { useNavigationType, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import BusList from "./pages/BusList";
 import ReviewBooking from "./pages/ReviewBooking";
@@ -23,8 +20,8 @@ function App() {
   }, [action, pathname]);
 
   useEffect(() => {
-    let title = "";
-    let metaDescription = "";
+    let title = "BUSBOY";
+    let metaDescription = "A Luxurious Booking Experience";
 
     switch (pathname) {
       case "/":
@@ -59,7 +56,7 @@ function App() {
 
     if (metaDescription) {
       const metaDescriptionTag = document.querySelector(
-        'head > meta[name="description"]'
+        'head > meta[name="description"]',
       );
       if (metaDescriptionTag) {
         metaDescriptionTag.content = metaDescription;
@@ -71,10 +68,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/bus-list" element={<BusList />} />
-      <Route
-        path="/review-booking"
-        element={<ReviewBooking />}
-      />
+      <Route path="/review-booking" element={<ReviewBooking />} />
       <Route path="/authentication/*" element={<Authentication />} />
       <Route path="/payment-portal" element={<PaymentPortal />} />
       <Route path="/booked-ticket" element={<BookedTicket />} />
